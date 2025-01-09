@@ -1,0 +1,8 @@
+{
+    "extends": ["../../tsconfig.json"],
+    "compilerOptions": {
+        "baseUrl": ".",
+        "typeRoots": ["./src/types", "./node_modules/@types"]
+    },
+    "include": ["./src", "./rollup.config.ts", "./typings.d.ts"]
+}

@@ -1,13 +1,13 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-10-26 17:34:47
- * @LastEditTime: 2025-01-09 15:00:18
+ * @LastEditTime: 2025-01-09 18:18:50
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCorePlugin/src/option.ts
  * @Description: 配置文件，用于设置标记器的各项参数
  */
 
 import cloneDeep from 'lodash/cloneDeep'
-import { hashTag } from './utils/hash'
+import { hashTag } from './utils'
 
 const DEFAULT_OPTION = {
     // 需要排除的文件路径，例如 node_modules、dist 等
@@ -36,9 +36,6 @@ const DEFAULT_OPTION = {
 
     // 描述信息
     describe: '',
-
-    // 是否开启调试模式，开启后会输出更多日志信息
-    debug: false,
 
     // 标签前缀，用于区分不同项目的标签
     tagPrefix: '',

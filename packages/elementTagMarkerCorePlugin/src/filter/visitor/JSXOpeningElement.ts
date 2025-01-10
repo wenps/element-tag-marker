@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-09 18:47:34
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-09 19:15:00
+ * @LastEditTime: 2025-01-10 14:55:11
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCorePlugin/src/filter/visitor/JSXOpeningElement.ts
  */
 
@@ -27,14 +27,18 @@ export default function JSXOpeningElement( path: any, hashValue: string) {
         (attr: any) => t.isJSXAttribute(attr) && (attr.name as any).name === option.tagKey
     );
 
-    if (!existingTag) {
-        // 创建新的JSX属性
-        const tagAttribute = t.jsxAttribute(
-            t.jsxIdentifier(option.tagKey),
-            t.stringLiteral(tagValue)
-        );
-        
-        // 添加属性到元素
+    // 创建新的JSX属性
+    const tagAttribute = t.jsxAttribute(
+        t.jsxIdentifier(option.tagKey),
+        t.stringLiteral(tagValue)
+    );
+
+    if (existingTag) {
+        // 如果已存在则替换
+        const index = path.node.attributes.indexOf(existingTag);
+        path.node.attributes[index] = tagAttribute;
+    } else {
+        // 如果不存在则添加
         path.node.attributes.push(tagAttribute);
     }
 }

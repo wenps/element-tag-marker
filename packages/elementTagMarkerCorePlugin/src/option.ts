@@ -1,15 +1,19 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-10-26 17:34:47
- * @LastEditTime: 2025-01-09 18:18:50
+ * @LastEditTime: 2025-01-21 16:04:37
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCorePlugin/src/option.ts
  * @Description: 配置文件，用于设置标记器的各项参数
  */
 
-import cloneDeep from 'lodash/cloneDeep'
+import lodash from 'lodash'
 import { hashTag } from './utils'
+import { BaseOption, TagType } from './type'
 
-const DEFAULT_OPTION = {
+const DEFAULT_OPTION: BaseOption = {
+    // 标记类型
+    tagType: TagType.hash,
+    
     // 需要排除的文件路径，例如 node_modules、dist 等
     excludedPath: [] as string[],
 
@@ -31,8 +35,8 @@ const DEFAULT_OPTION = {
     // 生成环境是否触发
     toProd: false,
 
-    // 是否将hash值写入原文件中
-    writeToFile: true,
+    // 是否将标识的值写入原文件中，只支持hash和path两种类型，function类型不支持，因为function类型是自定义的
+    writeToFile: false,
 
     // 描述信息
     describe: '',
@@ -41,21 +45,23 @@ const DEFAULT_OPTION = {
     tagPrefix: '',
 
     // 项目名称
-    projectName: ''
+    projectName: '',
+
+    // 标签函数，用于生成标签
+    tagFunction: (_path: string, _elementTag: Record<string, any>, _option: BaseOption): [string, string] => {
+        return ['','']
+    }
 }
 
-/** 配置选项类型定义 */
-type OptionType = typeof DEFAULT_OPTION
-
 /** 导出当前配置实例 */
-export let option: OptionType = { ...DEFAULT_OPTION }
+export let option: BaseOption = { ...DEFAULT_OPTION }
 
 /** 
  * 用户配置信息接口
  * @property {Partial<OptionType>} option - 部分或全部配置选项
  */
 export type OptionInfo = {
-    option: Partial<OptionType>
+    option: Partial<BaseOption>
 }
 
 /**
@@ -63,14 +69,16 @@ export type OptionInfo = {
  * @param {OptionInfo} optionInfo - 用户提供的配置信息
  * @returns {Partial<OptionType>} 处理后的用户配置
  */
-function generateUserOption(optionInfo: OptionInfo): Partial<OptionType> {
-    return cloneDeep(optionInfo.option)
+function generateUserOption(optionInfo: OptionInfo): Partial<BaseOption> {
+    return lodash.cloneDeep(optionInfo.option)
 }
 
 /**
  * 初始化配置
  * @param {OptionInfo} optionInfo - 用户提供的配置信息
  */
-export function initOption(optionInfo: OptionInfo): void {
-    option = { ...DEFAULT_OPTION, ...generateUserOption(optionInfo) }
+export function initOption(optionInfo?: OptionInfo): void {
+    option = { ...DEFAULT_OPTION, ...generateUserOption(optionInfo || {
+        option: {}
+    }) }
 }

@@ -1,8 +1,10 @@
 /*
  * @Date: 2025-01-08 11:51:33
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-09 18:32:50
+ * @LastEditTime: 2025-01-21 15:38:48
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCorePlugin/src/index.ts
  */
 export * from './option'
 export * as filter from './filter'
+export * from './type'
+export * from './utils'

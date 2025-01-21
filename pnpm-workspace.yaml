@@ -1,3 +1,10 @@
 packages:
     - "packages/*"
     - "example/*"
+  # 你可以添加更多目录，比如：
+  # - 'apps/*'       # 应用目录
+  # - 'libs/*'       # 库目录
+  # - 'tools/*'      # 工具目录
+  # 也可以排除某些目录
+  # - '!**/test/**'  # 排除 test 目录
+  # - '!**/dist/**'  # 排除 dist 目录

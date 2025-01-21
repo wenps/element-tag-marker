@@ -48,5 +48,6 @@
         "rollup-plugin-dts": "^6.1.0",
         "rollup-plugin-node-externals": "^7.1.2",
         "typescript": "^5.1.6"
-    }
+    },
+    "type": "module"
 }

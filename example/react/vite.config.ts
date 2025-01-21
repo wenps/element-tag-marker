@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-10 14:57:41
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-21 15:56:38
+ * @LastEditTime: 2025-01-21 17:39:34
  * @FilePath: /element-tag-marker/example/react/vite.config.ts
  */
 import { defineConfig } from 'vite'
@@ -21,7 +21,11 @@ export default defineConfig({
         viteElementTagMarkerPlugin({
             option: {
                 excludedTag: ['div'],
-                tagType: 'path'
+                writeToFile: 'path',
+                tagType: 'function',
+                tagFunction: (path, _tag, _option) => {
+                    return ['test', path]
+                }
             }
         })
     ]

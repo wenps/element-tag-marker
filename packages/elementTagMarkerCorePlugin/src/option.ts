@@ -1,7 +1,7 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-10-26 17:34:47
- * @LastEditTime: 2025-01-21 16:04:37
+ * @LastEditTime: 2025-01-21 16:35:05
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCorePlugin/src/option.ts
  * @Description: 配置文件，用于设置标记器的各项参数
  */
@@ -80,5 +80,5 @@ function generateUserOption(optionInfo: OptionInfo): Partial<BaseOption> {
 export function initOption(optionInfo?: OptionInfo): void {
     option = { ...DEFAULT_OPTION, ...generateUserOption(optionInfo || {
         option: {}
-    }) }
+    })}
 }

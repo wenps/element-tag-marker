@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-20 18:08:10
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-20 18:10:21
+ * @LastEditTime: 2025-01-21 17:36:56
  * @FilePath: /element-tag-marker/example/react/src/components/HelloWorld.tsx
  */
 import React from 'react';
@@ -20,3 +20,4 @@ const HelloWorld: React.FC<HelloWorldProps> = ({ name = 'World' }) => {
 };
 
 export default HelloWorld; 
+ // element-tag-marker: /Users/xiaoshanwen/Desktop/me/element-tag-marker/example/react/src/components/HelloWorld.tsx

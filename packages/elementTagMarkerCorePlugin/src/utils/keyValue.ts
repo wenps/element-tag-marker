@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-21 14:48:57
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-21 15:17:08
+ * @LastEditTime: 2025-01-21 18:22:01
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCorePlugin/src/utils/keyValue.ts
  */
 import { option } from "src/option";
@@ -24,17 +24,20 @@ export function getKeyValue(params:{
       case TagType.hash:
         // 使用哈希函数生成标记
         tagValue = setPrefix(option.hashFunction(path)) ;
-        break;
+        return { tag, tagValue }
       case TagType.path:
         // 使用文件路径作为标记
         tagValue = setPrefix(path);
-        break;
+        return { tag, tagValue }
       case TagType.function:
         // 使用自定义函数生成标记
-        [tag, tagValue] = option.tagFunction(path, elementTag, option);
-        break;
+        const result = option.tagFunction(path, elementTag, option);
+        if(Array.isArray(result)) {
+          return result
+        }
+        return { tag, tagValue }
     }
-    return { tag, tagValue }
+   
 }
 
 function setPrefix(tagValue: string) {

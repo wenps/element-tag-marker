@@ -51,3 +51,5 @@ function App() {
 }
 
 export default App
+
+ // element-tag-marker: /Users/xiaoshanwen/Desktop/me/element-tag-marker/example/react/src/App.tsx

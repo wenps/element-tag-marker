@@ -14,3 +14,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <App />
     </React.StrictMode>
 )
+
+ // element-tag-marker: /Users/xiaoshanwen/Desktop/me/element-tag-marker/example/react/src/main.tsx

@@ -1,12 +1,13 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-08-10 17:12:17
- * @LastEditTime: 2025-01-10 15:02:56
+ * @LastEditTime: 2025-01-22 11:34:04
  * @FilePath: /element-tag-marker/example/vue2/vite.config.ts
  */
 import path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue2'
+import viteElementTagMarkerPlugin from 'vite-element-tag-marker-plugin'
 
 export default defineConfig({
     resolve: {
@@ -22,6 +23,12 @@ export default defineConfig({
         }
     },
     plugins: [
-        vue()
+        vue(),
+        viteElementTagMarkerPlugin({
+            option: {
+                writeToFile: 'path',
+                tagType: 'path',
+            }
+        })
     ]
 })

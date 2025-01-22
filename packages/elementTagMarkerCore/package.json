@@ -1,5 +1,5 @@
 {
-    "name": "element-tag-marker-core-plugin",
+    "name": "element-tag-marker-core",
     "version": "0.0.1", 
     "description": "Core plugin for element tag marker functionality in vite and webpack.",
     "exports": {

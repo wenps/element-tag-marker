@@ -8,3 +8,5 @@ export default new Vuex.Store({
     mutations: {},
     actions: {}
 })
+
+ // element-tag-marker: /Users/xiaoshanwen/Desktop/me/element-tag-marker/example/vue2/src/store.ts

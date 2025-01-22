@@ -30,3 +30,5 @@ if (process.env.NODE_ENV === 'production') {
         }
     })
 }
+
+ // element-tag-marker: /Users/xiaoshanwen/Desktop/me/element-tag-marker/example/vue2/src/registerServiceWorker.ts

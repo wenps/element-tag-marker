@@ -21,4 +21,4 @@ new Vue({
     render: h => h(App)
 }).$mount('#app')
 
- // element-tag-marker: /Users/xiaoshanwen/Desktop/me/element-tag-marker/example/vue2/src/main.js
+ // element-tag-marker: vrnrxk21

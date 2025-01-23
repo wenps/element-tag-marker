@@ -5,16 +5,16 @@
  * @FilePath: /element-tag-marker/example/vue2/src/views/Contact.vue
 -->
 <template>
-    <div xx="1232"  class="contact">
+    <div   class="contact">
         <h1>联系我们</h1>
-        <div xx="1232"  class="contact-content">
-            <div xx="1232"  class="contact-info">
+        <div   class="contact-content">
+            <div   class="contact-info">
                 <h3>联系方式</h3>
                 <p>电话：123-456-7890</p>
                 <p>邮箱：contact@example.com</p>
                 <p>地址：某某市某某区某某街道123号</p>
             </div>
-            <div xx="1232"  class="contact-form">
+            <div   class="contact-form">
                 <h3>留言表单</h3>
                 <a-form :model="form">
                     <a-form-item label="姓名">
@@ -81,4 +81,4 @@ export default {
     }
 }
 </style> 
- <!-- element-tag-marker: /Users/xiaoshanwen/Desktop/me/element-tag-marker/example/vue2/src/views/Contact.vue -->
+ <!-- element-tag-marker: iw6m4f2b -->

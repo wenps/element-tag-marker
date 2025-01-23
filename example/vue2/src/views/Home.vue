@@ -1,18 +1,18 @@
 <template>
-    <div xx="1232"  class="content">
-        <div xx="1232"  class="hero-section">
+    <div   class="content">
+        <div   class="hero-section">
             <h1>欢迎来到我们的企业门户</h1>
             <p class="hero-text">为您提供专业的企业级解决方案</p>
-            <div xx="1232"  class="hero-buttons">
+            <div   class="hero-buttons">
                 <a-button type="primary" size="large" @click="learnMore">了解更多</a-button>
                 <a-button size="large" @click="contactUs">联系我们</a-button>
             </div>
         </div>
 
-        <div xx="1232"  class="features-section">
+        <div   class="features-section">
             <h2>我们的优势</h2>
-            <div xx="1232"  class="features-grid">
-                <div xx="1232"  class="feature-card">
+            <div   class="features-grid">
+                <div   class="feature-card">
                     <a-icon type="solution" class="feature-icon"/>
                     <h3>专业服务</h3>
                     <p>提供全方位的企业服务解决方案，满足您的各种业务需求。我们的专业团队拥有丰富的行业经验，能够为您量身定制最适合的解决方案。</p>
@@ -22,7 +22,7 @@
                         <li>风险管理服务</li>
                     </ul>
                 </div>
-                <div xx="1232"  class="feature-card">
+                <div   class="feature-card">
                     <a-icon type="bulb" class="feature-icon"/>
                     <h3>技术创新</h3>
                     <p>持续创新技术，为企业提供领先的技术支持。我们投入大量资源进行研发，确保为客户提供最前沿的技术解决方案。</p>
@@ -32,7 +32,7 @@
                         <li>区块链技术</li>
                     </ul>
                 </div>
-                <div xx="1232"  class="feature-card">
+                <div   class="feature-card">
                     <a-icon type="team" class="feature-icon"/>
                     <h3>优质团队</h3>
                     <p>拥有经验丰富的专业团队，为您提供最佳服务体验。我们的团队成员均来自业内顶尖企业，具备深厚的专业背景。</p>
@@ -45,78 +45,78 @@
             </div>
         </div>
 
-        <div xx="1232"  class="statistics-section">
+        <div   class="statistics-section">
             <h2>公司数据</h2>
-            <div xx="1232"  class="statistics-grid">
-                <div xx="1232"  class="statistic-item">
+            <div   class="statistics-grid">
+                <div   class="statistic-item">
                     <h3>1000+</h3>
                     <p>服务客户</p>
                 </div>
-                <div xx="1232"  class="statistic-item">
+                <div   class="statistic-item">
                     <h3>50+</h3>
                     <p>合作伙伴</p>
                 </div>
-                <div xx="1232"  class="statistic-item">
+                <div   class="statistic-item">
                     <h3>200+</h3>
                     <p>专业团队</p>
                 </div>
-                <div xx="1232"  class="statistic-item">
+                <div   class="statistic-item">
                     <h3>15年</h3>
                     <p>行业经验</p>
                 </div>
             </div>
         </div>
 
-        <div xx="1232"  class="about-section">
+        <div   class="about-section">
             <h2>关于我们</h2>
-            <div xx="1232"  class="about-content">
-                <div xx="1232"  class="about-text">
+            <div   class="about-content">
+                <div   class="about-text">
                     <p>我们是一家致力于为企业提供全方位解决方案的科技公司。通过持续创新和专业服务，我们帮助客户实现业务增长和数字化转型。</p>
                     <p>自成立以来，我们始终坚持"以客户为中心"的服务理念，不断提升服务质量和技术水平，为客户创造更大的价值。</p>
-                    <div xx="1232"  class="company-values">
-                        <div xx="1232"  class="value-item">
+                    <div   class="company-values">
+                        <div   class="value-item">
                             <h4>愿景</h4>
                             <p>成为全球领先的企业服务解决方案提供商</p>
                         </div>
-                        <div xx="1232"  class="value-item">
+                        <div   class="value-item">
                             <h4>使命</h4>
                             <p>用科技创新推动企业发展</p>
                         </div>
-                        <div xx="1232"  class="value-item">
+                        <div   class="value-item">
                             <h4>价值观</h4>
                             <p>诚信、创新、专业、共赢</p>
                         </div>
                     </div>
                 </div>
-                <div xx="1232"  class="about-image">
+                <div   class="about-image">
                     <img src="../assets/logo.png" alt="公司简介"/>
                 </div>
             </div>
         </div>
 
-        <div xx="1232"  class="contact-section">
+        <div   class="contact-section">
             <h2>联系我们</h2>
-            <div xx="1232"  class="contact-container">
-                <div xx="1232"  class="contact-info">
+            <div   class="contact-container">
+                <div   class="contact-info">
                     <h3>联系方式</h3>
-                    <div xx="1232"  class="info-item">
+                    <div   class="info-item">
                         <a-icon type="phone" />
                         <p><strong>服务热线：</strong> 400-888-8888</p>
                     </div>
-                    <div xx="1232"  class="info-item">
+                    <div   class="info-item">
                         <a-icon type="mail" />
                         <p><strong>商务邮箱：</strong> contact@company.com</p>
                     </div>
-                    <div xx="1232"  class="info-item">
+                    <div   class="info-item">
                         <a-icon type="environment" />
                         <p><strong>公司地址：</strong> 北京市朝阳区科技园区88号</p>
                     </div>
-                    <div xx="1232"  class="info-item">
+                    <div   class="info-item">
                         <a-icon type="clock-circle" />
                         <p><strong>工作时间：</strong> 周一至周五 9:00-18:00</p>
                     </div>
                 </div>
-                <div xx="1232"  class="contact-form">
+                <div   class="contact-form">
                     <h3>在线咨询</h3>
                     <a-form :form="form" @submit="handleSubmit">
                         <a-form-item label="姓名">
@@ -348,4 +348,4 @@ p {
 }
 </style>
 
- <!-- element-tag-marker: /Users/xiaoshanwen/Desktop/me/element-tag-marker/example/vue2/src/views/Home.vue -->
+ <!-- element-tag-marker: v40vri28 -->

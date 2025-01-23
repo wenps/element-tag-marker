@@ -5,10 +5,10 @@
  * @FilePath: /element-tag-marker/example/vue2/src/App.vue
 -->
 <template>
-    <div xx="1232"  id="app">
-        <div xx="1232"  class="main">
+    <div   id="app">
+        <div   class="main">
             <header class="header">
-                <div xx="1232"  class="logo">
+                <div   class="logo">
                     <img
                         class="logo-img"
                         @click="goHome"
@@ -102,4 +102,4 @@ main {
 }
 </style>
 
- <!-- element-tag-marker: /Users/xiaoshanwen/Desktop/me/element-tag-marker/example/vue2/src/App.vue -->
+ <!-- element-tag-marker: wenag321 -->

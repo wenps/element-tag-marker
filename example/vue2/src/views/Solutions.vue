@@ -5,10 +5,10 @@
  * @FilePath: /element-tag-marker/example/vue2/src/views/Solutions.vue
 -->
 <template>
-    <div xx="1232"  class="solutions">
+    <div   class="solutions">
         <h1>解决方案</h1>
-        <div xx="1232"  class="solutions-content">
-            <div xx="1232"  class="solution-card" v-for="(solution, index) in solutions" :key="index">
+        <div   class="solutions-content">
+            <div   class="solution-card" v-for="(solution, index) in solutions" :key="index">
                 <h3>{{ solution.name }}</h3>
                 <p>{{ solution.description }}</p>
             </div>
@@ -55,4 +55,4 @@ export default {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 </style> 
- <!-- element-tag-marker: /Users/xiaoshanwen/Desktop/me/element-tag-marker/example/vue2/src/views/Solutions.vue -->
+ <!-- element-tag-marker: 6no4at2d -->

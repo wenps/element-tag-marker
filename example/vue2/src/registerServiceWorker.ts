@@ -31,4 +31,4 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 
- // element-tag-marker: /Users/xiaoshanwen/Desktop/me/element-tag-marker/example/vue2/src/registerServiceWorker.ts
+ // element-tag-marker: 9g1arx2i

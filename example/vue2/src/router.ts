@@ -42,4 +42,4 @@ export default new Router({
     ]
 })
 
- // element-tag-marker: /Users/xiaoshanwen/Desktop/me/element-tag-marker/example/vue2/src/router.ts
+ // element-tag-marker: 67v6b623

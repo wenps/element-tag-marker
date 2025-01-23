@@ -1,7 +1,7 @@
 /*
  * @Author: 小山
  * @Date: 2023-08-10 17:12:17
- * @LastEditTime: 2025-01-22 13:59:53
+ * @LastEditTime: 2025-01-23 10:17:27
  * @FilePath: /element-tag-marker/packages/viteElementTagMarkerPlugin/src/index.ts
  * @Description: Vite插件，用于在构建过程中为元素添加标记
  */
@@ -38,7 +38,6 @@ export default function viteElementTagMarkerPlugin(optionInfo?: OptionInfo): Plu
      * @returns {string} 转换后的代码
      */
     async transform(code: string, path: string) {
-      console.log(code);
       
       
       // 检查文件类型是否符合要求

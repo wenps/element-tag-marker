@@ -9,4 +9,4 @@ export default new Vuex.Store({
     actions: {}
 })
 
- // element-tag-marker: /Users/xiaoshanwen/Desktop/me/element-tag-marker/example/vue2/src/store.ts
+ // element-tag-marker: ixwzmq22

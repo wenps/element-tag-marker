@@ -1,7 +1,7 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-10-12 18:18:51
- * @LastEditTime: 2025-01-23 11:50:13
+ * @LastEditTime: 2025-01-23 13:38:59
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/filter/visitor/CallExpression/index.ts
  */
 import handleJsxDEV from "./core/jsxDEV";
@@ -18,15 +18,17 @@ export default function (path: any, filePath: string) {
 
   // 判断是否为jsxDEV函数调用，处理react
   if (node.callee && node.callee.name === "jsxDEV") {
-    handleJsxDEV(node, filePath)
+    handleJsxDEV(node, filePath);
   }
   // 判断是否为_c函数调用，处理vue2
   if (node.callee && node.callee.name === "_c") {
-    handle_c(node, filePath)
+    handle_c(node, filePath);
   }
   // 判断是否为createElement函数调用，处理vue3
-  if (node.callee && node.callee.name === "_createElementVNode") {
-    handle_createElementVNode(node, filePath)
+  if (
+    node.callee &&
+    ["_createElementVNode", "_createBlock"].includes(node.callee.name)
+  ) {
+    handle_createElementVNode(node, filePath);
   }
 }
-

@@ -146,6 +146,22 @@ importers:
 
   example/vue3:
     dependencies:
+      '@vitalets/google-translate-api':
+        specifier: ^9.2.0
+        version: 9.2.0
+      ant-design-vue:
+        specifier: ^3.2.20
+        version: 3.2.20(vue@3.5.13(typescript@5.7.2))
+      pinia:
+        specifier: ^2.1.4
+        version: 2.3.0(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2))
+      vue:
+        specifier: ^3.3.0
+        version: 3.5.13(typescript@5.7.2)
+      vue-router:
+        specifier: ^4.2.2
+        version: 4.5.0(vue@3.5.13(typescript@5.7.2))
+    devDependencies:
       '@babel/core':
         specifier: ^7.23.2
         version: 7.26.0
@@ -155,28 +171,6 @@ importers:
       '@babel/preset-typescript':
         specifier: ^7.23.2
         version: 7.24.7(@babel/core@7.26.0)
-      '@vitalets/google-translate-api':
-        specifier: ^9.2.0
-        version: 9.2.0
-      ant-design-vue:
-        specifier: ^3.2.20
-        version: 3.2.20(vue@3.5.13(typescript@5.7.2))
-      json-format:
-        specifier: ^1.0.1
-        version: 1.0.1
-      tunnel:
-        specifier: 0.0.6
-        version: 0.0.6
-      vue:
-        specifier: ^3.2.13
-        version: 3.5.13(typescript@5.7.2)
-      vue-loader:
-        specifier: ^17.2.2
-        version: 17.4.2(vue@3.5.13(typescript@5.7.2))(webpack@4.47.0)
-      vue-router:
-        specifier: ^4.2.2
-        version: 4.5.0(vue@3.5.13(typescript@5.7.2))
-    devDependencies:
       '@types/node':
         specifier: ^20.3.3
         version: 20.14.15
@@ -192,27 +186,36 @@ importers:
       eslint-plugin-vue:
         specifier: ^9.15.1
         version: 9.32.0(eslint@8.57.1)
+      json-format:
+        specifier: ^1.0.1
+        version: 1.0.1
       less:
         specifier: ^4.2.0
         version: 4.2.0
-      pinia:
-        specifier: ^2.1.4
-        version: 2.3.0(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2))
       sass:
         specifier: ^1.63.6
         version: 1.77.8
       sass-loader:
         specifier: ^13.3.2
         version: 13.3.3(sass@1.77.8)(webpack@4.47.0)
+      tunnel:
+        specifier: 0.0.6
+        version: 0.0.6
       typescript:
         specifier: ^5.1.6
         version: 5.7.2
       vite:
         specifier: ^5.1.5
         version: 5.4.11(@types/node@20.14.15)(less@4.2.0)(sass@1.77.8)(terser@5.37.0)
+      vite-element-tag-marker-plugin:
+        specifier: workspace:*
+        version: link:../../packages/viteElementTagMarkerPlugin
       vite-plugin-legacy:
         specifier: ^2.1.0
         version: 2.1.0(vite@5.4.11(@types/node@20.14.15)(less@4.2.0)(sass@1.77.8)(terser@5.37.0))
+      vue-loader:
+        specifier: ^17.2.2
+        version: 17.4.2(vue@3.5.13(typescript@5.7.2))(webpack@4.47.0)
       vue-template-compiler:
         specifier: ^2.7.16
         version: 2.7.16

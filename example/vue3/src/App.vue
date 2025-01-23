@@ -1,26 +1,30 @@
 <!--
  * @Author: xiaoshanwen
  * @Date: 2023-08-11 09:56:13
- * @LastEditTime: 2024-04-03 18:01:22
- * @FilePath: /i18n_translation_vite/example/vue3/src/App.vue
+ * @LastEditTime: 2025-01-23 10:54:14
+ * @FilePath: /element-tag-marker/example/vue3/src/App.vue
 -->
 <template>
     <div class="main">
-        <header :name="name ? '小山' : $emit('text')">
+        <header>
             <div class="title">
                 <img
                     class="icon"
-                    @click="toPath"
-                    :name="name ? '小山' : $emit('text')"
-                    :src="img1"
+                    @click="toHome"
+                    src="https://www.antdv.com/assets/logo.1ef800a8.svg"
                 />
-                自动国际化插件
+                公司名称
             </div>
             <div class="operation">
-                <a-button @click="changeLang('zhcn')" class="mr10">中文</a-button>
-                <a-button @click="changeLang('en')" class="mr10">英文</a-button>
-                <a-button @click="changeLang('ko')" class="mr10">韩文</a-button>
-                <a-button @click="changeLang('ja')" class="mr10">日文</a-button>
+                <router-link to="/" class="nav-item">首页</router-link>
+                <router-link to="/products" class="nav-item">产品</router-link>
+                <router-link to="/solutions" class="nav-item">解决方案</router-link>
+                <router-link to="/about" class="nav-item">关于我们</router-link>
+                <router-link to="/contact" class="nav-item">联系我们</router-link>
+                <div class="language-selector">
+                    <a-button @click="changeLang('zhcn')" class="mr10">中文</a-button>
+                    <a-button @click="changeLang('en')" class="mr10">English</a-button>
+                </div>
             </div>
         </header>
         <main>
@@ -28,21 +32,14 @@
         </main>
     </div>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 export default defineComponent({
-    data() {
-        return {
-            name: 1,
-            img1: 'https://www.antdv.com/assets/logo.1ef800a8.svg'
-        }
-    },
     methods: {
-        nameA(data: string) {
-            return data
-        },
-        toPath() {
-            this.$router.push({ name: 'test', params: { myid: this.name } })
+        toHome() {
+            this.$router.push('/')
         },
         changeLang(value: string) {
             localStorage.setItem('lang', value)
@@ -51,16 +48,15 @@ export default defineComponent({
     }
 })
 </script>
+
 <style lang="scss" scoped>
-main {
-    padding: 20px;
-}
 .main {
     width: 100vw;
     height: 100vh;
     background: #fff;
     display: flex;
     flex-direction: column;
+    
     header {
         width: 100%;
         height: 64px;
@@ -69,51 +65,57 @@ main {
         display: flex;
         justify-content: space-between;
         z-index: 10;
+        background: #fff;
+        
         .title {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding-left: 60px;
-            height: inherit;
+            font-size: 20px;
+            font-weight: 600;
+            
             .icon {
                 height: 32px;
                 width: 32px;
                 margin-right: 16px;
-            }
-            .name {
-                color: #000000d9;
-                font-size: 18px;
-                font-family:
-                    Avenir,
-                    -apple-system,
-                    BlinkMacSystemFont,
-                    Segoe UI,
-                    Roboto,
-                    Helvetica Neue,
-                    Arial,
-                    Noto Sans,
-                    sans-serif,
-                    'Apple Color Emoji',
-                    'Segoe UI Emoji',
-                    Segoe UI Symbol,
-                    'Noto Color Emoji',
-                    sans-serif;
-                font-weight: 500;
+                cursor: pointer;
             }
         }
+        
         .operation {
             height: inherit;
             display: flex;
             align-items: center;
+            padding-right: 60px;
+            
+            .nav-item {
+                padding: 0 20px;
+                color: #333;
+                text-decoration: none;
+                font-size: 16px;
+                
+                &:hover {
+                    color: #1890ff;
+                }
+            }
+            
+            .language-selector {
+                margin-left: 20px;
+                border-left: 1px solid #eee;
+                padding-left: 20px;
+            }
         }
     }
+    
     main {
         flex: 1;
         overflow: auto;
-        display: flex;
     }
+    
     .mr10 {
         margin-right: 10px;
     }
 }
 </style>
+
+ <!-- element-tag-marker: rjyn8k21 -->

@@ -1,12 +1,13 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-08-10 17:12:17
- * @LastEditTime: 2025-01-10 15:00:56
+ * @LastEditTime: 2025-01-23 11:03:20
  * @FilePath: /element-tag-marker/example/vue3/vite.config.ts
  */
 import path from 'path'
 import { defineConfig } from 'vite'
 import createVuePlugin from '@vitejs/plugin-vue'
+import viteElementTagMarkerPlugin from 'vite-element-tag-marker-plugin'
 
 const vuePlugin = createVuePlugin({
     include: [/\.vue$/],
@@ -31,5 +32,10 @@ export default defineConfig({
             plugins: path.resolve(__dirname, './src/plugins')
         }
     },
-    plugins: [vuePlugin]
+    plugins: [vuePlugin, viteElementTagMarkerPlugin({
+        option: {
+            writeToFile: 'hash',
+            tagType: 'hash'
+        }
+    })]
 })

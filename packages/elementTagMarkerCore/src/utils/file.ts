@@ -1,16 +1,17 @@
 /*
  * @Date: 2025-01-21 15:36:55
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-21 17:39:00
- * @FilePath: /element-tag-marker/packages/elementTagMarkerCorePlugin/src/utils/file.ts
+ * @LastEditTime: 2025-01-23 11:30:54
+ * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/utils/file.ts
  */
 import { option } from "src/option";
 import { TagType } from "src/type";
 import fs from 'fs'
 
+
 /**
- * @description: Write tag identifier to file
- * @param {string} path - File path
+ * @description: 将标签标识符写入文件
+ * @param {string} path - 文件路径
  */
 export function writeTagToFile(path: string) {
     if (!option.writeToFile) {
@@ -21,12 +22,12 @@ export function writeTagToFile(path: string) {
     const lines = content.split('\n');
     const lastLine = lines[lines.length - 1];
 
-    // Generate tag value based on option
+    // 根据选项生成标签值
     const tagValue = option.writeToFile === TagType.hash 
         ? option.hashFunction(path)
         : path;
 
-    // Get comment format based on file extension
+    // 根据文件扩展名获取注释格式
     const getCommentFormat = (filePath: string) => {
         if (filePath.endsWith('.vue')) {
             return ` <!-- element-tag-marker: ${tagValue} -->`;
@@ -42,7 +43,7 @@ export function writeTagToFile(path: string) {
         return;
     }
 
-    // Update content if needed
+    // 如果需要则更新内容
     let newContent = content;
     if (!lastLine.includes('element-tag-marker:')) {
         newContent = content + '\n' + commentFormat;
@@ -52,7 +53,7 @@ export function writeTagToFile(path: string) {
     } else {
         newContent = content + '\n' + commentFormat;
     }
-    // Write to file if content changed
+    // 如果内容有变化则写入文件
     if (newContent !== content) {
         fs.writeFileSync(path, newContent);
     }

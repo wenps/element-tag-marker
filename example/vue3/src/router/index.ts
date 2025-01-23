@@ -1,43 +1,40 @@
 /*
- * @Author: xiaoshanwen
- * @Date: 2025-01-23 11:00:00
- * @LastEditTime: 2025-01-23 10:59:24
- * @FilePath: /element-tag-marker/example/vue3/src/router/index.ts
+ * @Date: 2025-01-23 18:13:25
+ * @LastEditors: xiaoshan
+ * @LastEditTime: 2025-01-23 18:17:05
+ * @FilePath: /element-tag-marker/example/webpack-vue3/src/router/index.ts
  */
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import About from '../views/About.vue'
+import Products from '../views/Products.vue'
+import Contact from '../views/Contact.vue'
 
 const router = createRouter({
-    history: createWebHashHistory(),
-    routes: [
-        {
-            path: '/',
-            name: 'home',
-            component: Home
-        },
-        {
-            path: '/products',
-            name: 'products',
-            component: () => import('../views/Products.vue')
-        },
-        {
-            path: '/solutions',
-            name: 'solutions',
-            component: () => import('../views/Solutions.vue')
-        },
-        {
-            path: '/about',
-            name: 'about',
-            component: () => import('../views/About.vue')
-        },
-        {
-            path: '/contact',
-            name: 'contact',
-            component: () => import('../views/Contact.vue')
-        }
-    ]
+  history: createWebHistory(),
+  routes: [
+    {
+      path: '/',
+      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: About
+    },
+    {
+      path: '/products',
+      name: 'Products',
+      component: Products
+    },
+    {
+      path: '/contact',
+      name: 'Contact',
+      component: Contact
+    }
+  ]
 })
 
-export default router
-
+export default router 
  // element-tag-marker: u3820c29

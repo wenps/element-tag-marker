@@ -1,65 +1,83 @@
-<!--
- * @Date: 2025-01-23 10:56:31
- * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-23 10:56:43
- * @FilePath: /element-tag-marker/example/vue3/src/views/Products.vue
--->
 <template>
-    <div class="products">
-        <h1>我们的产品</h1>
-        <div class="product-list">
-            <div class="product-item" v-for="(product, index) in products" :key="index">
-                <h3>{{ product.name }}</h3>
-                <p>{{ product.description }}</p>
-            </div>
-        </div>
+  <div class="products">
+    <h1>产品服务</h1>
+    <div class="product-grid">
+      <div v-for="product in products" :key="product.id" class="product-card">
+        <img :src="product.image" :alt="product.name">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <button @click="viewDetails(product.id)">了解更多</button>
+      </div>
     </div>
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-    data() {
-        return {
-            products: [
-                { name: '产品一', description: '产品一的详细描述' },
-                { name: '产品二', description: '产品二的详细描述' },
-                { name: '产品三', description: '产品三的详细描述' }
-            ]
-        }
-    }
-})
+const products = ref([
+  {
+    id: 1,
+    name: '智能分析平台',
+    description: '企业级数据分析和决策支持系统',
+    image: '../assets/product1.jpg'
+  },
+  {
+    id: 2,
+    name: '云服务平台',
+    description: '高性能云计算解决方案',
+    image: '../assets/product2.jpg'
+  },
+  {
+    id: 3,
+    name: '区块链服务',
+    description: '安全可靠的区块链应用平台',
+    image: '../assets/product3.jpg'
+  }
+])
+
+const viewDetails = (id: number) => {
+  console.log(`查看产品详情: ${id}`)
+}
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .products {
-    padding: 40px;
-    
-    h1 {
-        text-align: center;
-        margin-bottom: 40px;
-    }
-    
-    .product-list {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        
-        .product-item {
-            padding: 20px;
-            border: 1px solid #eee;
-            border-radius: 4px;
-            
-            h3 {
-                margin-bottom: 10px;
-            }
-            
-            p {
-                color: #666;
-            }
-        }
-    }
+  padding: 2rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.product-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.product-card h3, .product-card p {
+  padding: 1rem;
+  margin: 0;
+}
+
+button {
+  width: 100%;
+  padding: 1rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 </style> 
  <!-- element-tag-marker: lwtkni2c -->

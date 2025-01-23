@@ -1,6 +1,13 @@
+/*
+ * @Date: 2025-01-23 13:44:00
+ * @LastEditors: xiaoshan
+ * @LastEditTime: 2025-01-23 18:21:01
+ * @FilePath: /element-tag-marker/example/webpack-vue3/webpack.config.js
+ */
 const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpackElementTagMarkerPlugin  = require('webpack-element-tag-marker-plugin');
 
 module.exports = {
   entry: './src/main.ts',
@@ -34,7 +41,13 @@ module.exports = {
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html'
-    })
+    }),
+    new webpackElementTagMarkerPlugin({
+      option: {
+          writeToFile: 'hash',
+          tagType: 'hash'
+      }
+  })
   ],
   devServer: {
     port: 3000,

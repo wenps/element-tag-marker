@@ -1,7 +1,7 @@
 <!--
  * @Date: 2025-01-23 13:44:37
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-23 13:46:39
+ * @LastEditTime: 2025-01-23 18:15:40
  * @FilePath: /element-tag-marker/example/webpack-vue3/src/App.vue
 -->
 <template>
@@ -9,89 +9,102 @@
     <nav class="navbar">
       <div class="logo">FutureTech</div>
       <div class="nav-links">
-        <a v-for="link in navLinks" 
-           :key="link.id" 
-           :href="link.href"
-           @click="scrollToSection(link.href)">
+        <router-link v-for="link in navLinks" 
+                    :key="link.path" 
+                    :to="link.path">
           {{ link.text }}
-        </a>
+        </router-link>
       </div>
     </nav>
 
-    <section class="hero" id="home">
-      <h1>{{ heroTitle }}</h1>
-      <p>{{ heroSubtitle }}</p>
-      <button class="cta-button" @click="handleCTA">
-        {{ ctaText }}
-      </button>
-    </section>
+    <router-view></router-view>
 
-    <section class="features" id="features">
-      <h2>核心优势</h2>
-      <div class="feature-grid">
-        <div v-for="feature in features" 
-             :key="feature.id" 
-             class="feature-card">
-          <i :class="feature.icon"></i>
-          <h3>{{ feature.title }}</h3>
-          <p>{{ feature.description }}</p>
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>联系我们</h3>
+          <p>电话：400-888-8888</p>
+          <p>邮箱：contact@futuretech.com</p>
+        </div>
+        <div class="footer-section">
+          <h3>关注我们</h3>
+          <div class="social-links">
+            <a href="#" target="_blank">微信</a>
+            <a href="#" target="_blank">微博</a>
+            <a href="#" target="_blank">GitHub</a>
+          </div>
         </div>
       </div>
-    </section>
+      <div class="footer-bottom">
+        <p>&copy; 2024 FutureTech. All rights reserved.</p>
+      </div>
+    </footer>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import './App.css'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  name: 'App',
-  setup() {
-    const navLinks = ref([
-      { id: 1, text: '首页', href: '#home' },
-      { id: 2, text: '特性', href: '#features' },
-      { id: 3, text: '关于', href: '#about' },
-      { id: 4, text: '联系我们', href: '#contact' }
-    ])
+const navLinks = ref([
+  { path: '/', text: '首页' },
+  { path: '/products', text: '产品' },
+  { path: '/about', text: '关于' },
+  { path: '/contact', text: '联系我们' }
+])
+</script>
 
-    const features = ref([
-      {
-        id: 1,
-        title: '人工智能',
-        description: '领先的AI技术应用',
-        icon: 'ai-icon'
-      },
-      {
-        id: 2,
-        title: '区块链',
-        description: '安全可靠的区块链解决方案',
-        icon: 'blockchain-icon'
-      }
-    ])
+<style>
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-    const heroTitle = ref('未来科技，现在开始')
-    const heroSubtitle = ref('用科技改变世界，创造美好未来')
-    const ctaText = ref('开始探索')
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-    const handleCTA = () => {
-      console.log('CTA clicked')
-    }
+.nav-links a {
+  margin-left: 2rem;
+  text-decoration: none;
+  color: #333;
+}
 
-    const scrollToSection = (href: string) => {
-      const element = document.querySelector(href)
-      element?.scrollIntoView({ behavior: 'smooth' })
-    }
+.nav-links a.router-link-active {
+  color: #007bff;
+}
 
-    return {
-      navLinks,
-      features,
-      heroTitle,
-      heroSubtitle,
-      ctaText,
-      handleCTA,
-      scrollToSection
-    }
-  }
-})
-</script> 
+.footer {
+  margin-top: auto;
+  background: #333;
+  color: white;
+  padding: 2rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.social-links a {
+  margin-right: 1rem;
+  color: white;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #555;
+}
+</style> 
+ <!-- element-tag-marker: 5aaqv029 -->

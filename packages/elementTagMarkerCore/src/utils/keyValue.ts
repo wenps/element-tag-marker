@@ -1,8 +1,8 @@
 /*
  * @Date: 2025-01-21 14:48:57
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-21 18:22:01
- * @FilePath: /element-tag-marker/packages/elementTagMarkerCorePlugin/src/utils/keyValue.ts
+ * @LastEditTime: 2025-01-23 17:12:19
+ * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/utils/keyValue.ts
  */
 import { option } from "src/option";
 import { TagType } from "src/type";
@@ -15,7 +15,7 @@ import { TagType } from "src/type";
 export function getKeyValue(params:{
     path: string,
     elementTag: object
-}) {
+}): {tag: string, tagValue: string} | ([tag: string, value: string][]) {
     const { path, elementTag } = params;
     // 根据配置的标记类型生成标记值
     let tagValue = '';
@@ -31,11 +31,12 @@ export function getKeyValue(params:{
         return { tag, tagValue }
       case TagType.function:
         // 使用自定义函数生成标记
-        const result = option.tagFunction(path, elementTag, option);
+        const result = option.tagFunction(path, elementTag, option); // 注意看 tagFunction 的返回类型
         if(Array.isArray(result)) {
           return result
+        } else {
+          return result
         }
-        return { tag, tagValue }
     }
    
 }

@@ -1,9 +1,9 @@
 {
-    "name": "vite-element-tag-marker-plugin",
-    "version": "0.0.1",
-    "description": "Vite plugin for marking elements with unique tags",
+    "name": "webpack-element-tag-marker-plugin",
+    "version": "0.0.1", 
+    "description": "Webpack plugin for marking elements with unique tags",
     "keywords": [
-        "vite",
+        "webpack",
         "plugin",
         "element",
         "tag",
@@ -32,19 +32,26 @@
     },
     "homepage": "https://github.com/wenps/element-tag-marker#readme",
     "dependencies": {
+        "@babel/core": "^7.23.2",
         "@babel/traverse": "^7.26.4",
         "element-tag-marker-core": "workspace:*",
-        "json-format": "^1.0.1"
+        "json-format": "^1.0.1",
+        "webpack": "^5.96.1"
     },
     "devDependencies": {
-        "@babel/core": "^7.23.2",
         "@rollup/plugin-typescript": "^11.1.5",
         "@types/babel__core": "^7.20.3",
         "@types/node": "^20.3.3",
+        "@types/webpack": "^5.28.5",
+        "@types/webpack-env": "^1.18.5",
+        "@types/webpack-sources": "^3.2.3",
         "rollup": "^4.3.0",
         "rollup-plugin-dts": "^6.1.0",
         "rollup-plugin-node-externals": "^7.1.2",
         "typescript": "^5.1.6",
-        "vite": "^2.8.6"
+        "webpack-sources": "^3.2.3"
+    },
+    "peerDependencies": {
+        "webpack": "^5.0.0"
     }
 }

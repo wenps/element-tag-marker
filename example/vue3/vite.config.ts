@@ -1,7 +1,7 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-08-10 17:12:17
- * @LastEditTime: 2025-01-23 11:03:20
+ * @LastEditTime: 2025-01-23 16:34:33
  * @FilePath: /element-tag-marker/example/vue3/vite.config.ts
  */
 import path from 'path'
@@ -35,7 +35,10 @@ export default defineConfig({
     plugins: [vuePlugin, viteElementTagMarkerPlugin({
         option: {
             writeToFile: 'hash',
-            tagType: 'hash'
+            tagType: 'function',
+            tagFunction: (path, _tag, option) => {
+                return [['hash', option.hashFunction(path)], ['path', path]]
+            }
         }
     })]
 })

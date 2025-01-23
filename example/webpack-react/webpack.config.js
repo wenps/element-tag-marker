@@ -1,5 +1,12 @@
+/*
+ * @Date: 2025-01-23 13:43:39
+ * @LastEditors: xiaoshan
+ * @LastEditTime: 2025-01-23 15:31:15
+ * @FilePath: /element-tag-marker/example/webpack-react/webpack.config.js
+ */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpackElementTagMarkerPlugin  = require('webpack-element-tag-marker-plugin');
 
 module.exports = {
   entry: './src/index.tsx',
@@ -40,6 +47,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
+    new webpackElementTagMarkerPlugin({
+      option: {
+          writeToFile: 'hash',
+          tagType: 'hash'
+      }
+  })
   ],
   devServer: {
     port: 3000,

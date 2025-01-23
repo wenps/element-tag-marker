@@ -274,6 +274,9 @@ importers:
       webpack-dev-server:
         specifier: ^4.15.1
         version: 4.15.2(webpack-cli@5.1.4)(webpack@5.97.1)
+      webpack-element-tag-marker-plugin:
+        specifier: workspace:*
+        version: link:../../packages/webpackElementTagMarkerPlugin
 
   example/webpack-vue2:
     dependencies:
@@ -470,6 +473,58 @@ importers:
       vite:
         specifier: ^2.8.6
         version: 2.9.18(less@4.2.0)(sass@1.77.8)
+
+  packages/webpackElementTagMarkerPlugin:
+    dependencies:
+      '@babel/core':
+        specifier: ^7.23.2
+        version: 7.26.0
+      '@babel/traverse':
+        specifier: ^7.26.4
+        version: 7.26.5
+      element-tag-marker-core:
+        specifier: workspace:*
+        version: link:../elementTagMarkerCore
+      json-format:
+        specifier: ^1.0.1
+        version: 1.0.1
+      webpack:
+        specifier: ^5.96.1
+        version: 5.97.1(webpack-cli@5.1.4)
+    devDependencies:
+      '@rollup/plugin-typescript':
+        specifier: ^11.1.5
+        version: 11.1.6(rollup@4.20.0)(tslib@2.6.3)(typescript@5.7.2)
+      '@types/babel__core':
+        specifier: ^7.20.3
+        version: 7.20.5
+      '@types/node':
+        specifier: ^20.3.3
+        version: 20.14.15
+      '@types/webpack':
+        specifier: ^5.28.5
+        version: 5.28.5
+      '@types/webpack-env':
+        specifier: ^1.18.5
+        version: 1.18.5
+      '@types/webpack-sources':
+        specifier: ^3.2.3
+        version: 3.2.3
+      rollup:
+        specifier: ^4.3.0
+        version: 4.20.0
+      rollup-plugin-dts:
+        specifier: ^6.1.0
+        version: 6.1.1(rollup@4.20.0)(typescript@5.7.2)
+      rollup-plugin-node-externals:
+        specifier: ^7.1.2
+        version: 7.1.2(rollup@4.20.0)
+      typescript:
+        specifier: ^5.1.6
+        version: 5.7.2
+      webpack-sources:
+        specifier: ^3.2.3
+        version: 3.2.3
 
 packages:
 
@@ -2017,11 +2072,20 @@ packages:
   '@types/sockjs@0.3.36':
     resolution: {integrity: sha512-MK9V6NzAS1+Ud7JV9lJLFqW85VbC9dq3LmwZCuBe4wBDgKC0Kj/jd8Xl+nSviU+Qc3+m7umHHyHg//2KSa0a0Q==}
 
+  '@types/source-list-map@0.1.6':
+    resolution: {integrity: sha512-5JcVt1u5HDmlXkwOD2nslZVllBBc7HDuOICfiZah2Z0is8M8g+ddAEawbmd3VjedfDHBzxCaXLs07QEmb7y54g==}
+
   '@types/tunnel@0.0.7':
     resolution: {integrity: sha512-VYKjZSmb2PvUwXoux4Gy4LAk7kzOB1ktkjyL4lxvpkqL2adgR+Qrh/yFyWluvJgIXWFicqs7XuzPI2NbTO/r3Q==}
 
   '@types/webpack-env@1.18.5':
     resolution: {integrity: sha512-wz7kjjRRj8/Lty4B+Kr0LN6Ypc/3SymeCCGSbaXp2leH0ZVg/PriNiOwNj4bD4uphI7A8NXS4b6Gl373sfO5mA==}
+
+  '@types/webpack-sources@3.2.3':
+    resolution: {integrity: sha512-4nZOdMwSPHZ4pTEZzSp0AsTM4K7Qmu40UKW4tJDiOVs20UzYF9l+qUe4s0ftfN0pin06n+5cWWDJXH+sbhAiDw==}
+
+  '@types/webpack@5.28.5':
+    resolution: {integrity: sha512-wR87cgvxj3p6D0Crt1r5avwqffqPXUkNlnQ1mjU93G7gCuFjufZR4I6j8cz5g1F1tTYpfOOFvly+cmIQwL9wvw==}
 
   '@types/wrap-ansi@3.0.0':
     resolution: {integrity: sha512-ltIpx+kM7g/MLRZfkbL7EsCEjfzCcScLpkg37eXEtx5kmrAKBkTJwd1GIAjDSL8wTpM6Hzn5YO4pSb91BEwu1g==}
@@ -9814,11 +9878,30 @@ snapshots:
     dependencies:
       '@types/node': 20.14.15
 
+  '@types/source-list-map@0.1.6': {}
+
   '@types/tunnel@0.0.7':
     dependencies:
       '@types/node': 20.14.15
 
   '@types/webpack-env@1.18.5': {}
+
+  '@types/webpack-sources@3.2.3':
+    dependencies:
+      '@types/node': 20.14.15
+      '@types/source-list-map': 0.1.6
+      source-map: 0.7.4
+
+  '@types/webpack@5.28.5':
+    dependencies:
+      '@types/node': 20.14.15
+      tapable: 2.2.1
+      webpack: 5.97.1(webpack-cli@5.1.4)
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
+      - webpack-cli
 
   '@types/wrap-ansi@3.0.0': {}
 

@@ -1,8 +1,8 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-10-26 17:34:47
- * @LastEditTime: 2025-01-21 16:35:05
- * @FilePath: /element-tag-marker/packages/elementTagMarkerCorePlugin/src/option.ts
+ * @LastEditTime: 2025-01-23 16:53:03
+ * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/option.ts
  * @Description: 配置文件，用于设置标记器的各项参数
  */
 
@@ -48,8 +48,8 @@ const DEFAULT_OPTION: BaseOption = {
     projectName: '',
 
     // 标签函数，用于生成标签
-    tagFunction: (_path: string, _elementTag: Record<string, any>, _option: BaseOption): [string, string] => {
-        return ['','']
+    tagFunction: (_path: string, _elementTag: Record<string, any>, _option: BaseOption) => {
+        return [['','']]
     }
 }
 

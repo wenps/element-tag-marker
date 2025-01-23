@@ -1,22 +1,22 @@
 /*
- * @Date: 2025-01-09 18:19:35
+ * @Date: 2025-01-23 14:28:42
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-09 19:15:34
- * @FilePath: /element-tag-marker/packages/viteElementTagMarkerPlugin/rollup.config.ts
+ * @LastEditTime: 2025-01-23 15:20:47
+ * @FilePath: /element-tag-marker/packages/webpackElementTagMarkerPlugin/rollup.config.ts
  */
 import { defineConfig } from 'rollup'
 import typescript from '@rollup/plugin-typescript'
 import path from 'node:path'
 import { fileURLToPath } from 'url'
 import dts from 'rollup-plugin-dts'
-import externals from 'rollup-plugin-node-externals'
 
-function resolve(...filePaths: string[]) {
+function resolve(filePath: string) {
     const __dirname = path.dirname(fileURLToPath(import.meta.url))
-    return path.resolve(__dirname, ...filePaths)
+    return path.resolve(__dirname, filePath)
 }
 
 const input = resolve('./src/index.ts')
+const loaderInput = resolve('./src/Loader/index.ts')
 
 const buildConfig = defineConfig({
     input: input,
@@ -30,9 +30,54 @@ const buildConfig = defineConfig({
             format: 'cjs'
         }
     ],
-    plugins: [typescript(), externals()]
+    plugins: [
+        typescript({
+            tsconfig: resolve('./tsconfig.json')
+        })
+    ]
 })
 
+const loaderBuildConfig = defineConfig({
+    input: loaderInput,
+    output: [
+        {
+            file: resolve('./dist/Loader/index.mjs'),
+            format: 'esm'
+        },
+        {
+            file: resolve('./dist/Loader/index.cjs'),
+            format: 'cjs'
+        }
+    ],
+    plugins: [
+        typescript({
+            tsconfig: resolve('./tsconfig.json')
+        })
+    ]
+})
+
+/**
+ * @description: 类型配置
+ * @return {*}
+ */
+const loaderDtsConfig = defineConfig({
+    input: loaderInput,
+    output: {
+        file: resolve('./dist/Loader/index.d.ts'),
+        format: 'esm'
+    },
+    plugins: [
+        typescript({
+            tsconfig: resolve('./tsconfig.json')
+        }),
+        dts()
+    ]
+})
+
+/**
+ * @description: 类型配置
+ * @return {*}
+ */
 const dtsConfig = defineConfig({
     input: input,
     output: {
@@ -47,4 +92,4 @@ const dtsConfig = defineConfig({
     ]
 })
 
-export default [buildConfig, dtsConfig]
+export default [buildConfig, dtsConfig, loaderBuildConfig, loaderDtsConfig]

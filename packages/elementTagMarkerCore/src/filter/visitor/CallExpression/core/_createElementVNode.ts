@@ -1,28 +1,39 @@
 /*
  * @Date: 2025-01-22 19:25:56
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-23 14:06:59
+ * @LastEditTime: 2025-01-23 17:29:24
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/filter/visitor/CallExpression/core/_createElementVNode.ts
  */
 import { getKeyValue, checkTag } from "src/utils";
 import { setAttr } from "../utils";
 import * as t from "@babel/types";
 
+/**
+ * 处理 Vue3 的 _createElementVNode 和 webpack 打包的 React createElement 函数调用
+ * 为组件添加标记属性
+ * @param {any} node - AST节点对象
+ * @param {string} filePath - 当前处理的文件路径
+ */
 export default function (node: any, filePath: string) {
-    // 获取标签名
+    // 获取组件标签名
     const tagName = node.arguments[0].value;
+    // 检查标签是否需要处理,不需要则直接返回
     if (!checkTag(tagName)) return;
 
+    // 获取props参数(第二个参数)
     let propsArg = node.arguments[1];
 
-    // 如果 propsArg 不存在，对于 vue3 而言只有null这种情况
+    console.log(node);
+    
+
+    // 处理props参数不存在或为null的情况
     if (!propsArg || t.isNullLiteral(propsArg)) {
-      // 创建新的对象表达式
+      // 创建一个空的对象表达式作为新的props
       let attrsObj = t.objectExpression([]);
-      // 获取需要添加的标记属性
+      // 获取需要添加的标记属性信息
       const res = getKeyValue({ path: filePath, elementTag: node });
       
-      // 添加标记属性到 attrs 对象
+      // 根据返回类型添加标记属性到现有的props对象中
       if (Array.isArray(res)) {
         res.forEach(([tag, value]) => {
           setAttr(tag, value, attrsObj);
@@ -30,12 +41,14 @@ export default function (node: any, filePath: string) {
       } else {
         setAttr(res.tag, res.tagValue, attrsObj);
       }
-      // 如果第二个参数不存在，对于vue3而已只有null，直接将attrsObj设置为第二个参数
+      // 将新创建的props对象设置为第二个参数
       node.arguments[1] = attrsObj;
     } else {
-      // 获取需要添加的标记属性
+      // props参数存在的情况
+      // 获取需要添加的标记属性信息
       const res = getKeyValue({ path: filePath, elementTag: node });
-      // 添加标记属性到 attrs 对象
+      console.log(res);
+      // 根据返回类型添加标记属性到现有的props对象中
       if (Array.isArray(res)) {
         res.forEach(([tag, value]) => {
           setAttr(tag, value, propsArg);

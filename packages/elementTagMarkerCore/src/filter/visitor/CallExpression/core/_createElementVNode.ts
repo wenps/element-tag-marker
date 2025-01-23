@@ -1,16 +1,20 @@
 /*
  * @Date: 2025-01-22 19:25:56
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-23 17:29:24
+ * @LastEditTime: 2025-01-23 18:05:29
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/filter/visitor/CallExpression/core/_createElementVNode.ts
  */
 import { getKeyValue, checkTag } from "src/utils";
-import { setAttr } from "../utils";
+import { setObjAttrToObj } from "../utils";
 import * as t from "@babel/types";
 
 /**
- * 处理 Vue3 的 _createElementVNode 和 webpack 打包的 React createElement 函数调用
+ * 处理 Vue3 的 _createElementVNode 函数调用和 React 的 createElement 函数调用
  * 为组件添加标记属性
+ * 支持以下场景:
+ * 1. Vue3 的 _createElementVNode 函数
+ * 2. webpack 打包后的 React.createElement 函数
+ * 
  * @param {any} node - AST节点对象
  * @param {string} filePath - 当前处理的文件路径
  */
@@ -23,38 +27,22 @@ export default function (node: any, filePath: string) {
     // 获取props参数(第二个参数)
     let propsArg = node.arguments[1];
 
-    console.log(node);
-    
-
     // 处理props参数不存在或为null的情况
     if (!propsArg || t.isNullLiteral(propsArg)) {
-      // 创建一个空的对象表达式作为新的props
-      let attrsObj = t.objectExpression([]);
-      // 获取需要添加的标记属性信息
-      const res = getKeyValue({ path: filePath, elementTag: node });
-      
-      // 根据返回类型添加标记属性到现有的props对象中
-      if (Array.isArray(res)) {
-        res.forEach(([tag, value]) => {
-          setAttr(tag, value, attrsObj);
-        });
-      } else {
-        setAttr(res.tag, res.tagValue, attrsObj);
-      }
-      // 将新创建的props对象设置为第二个参数
-      node.arguments[1] = attrsObj;
+        // 创建一个空的对象表达式作为新的props
+        let attrsObj = t.objectExpression([]);
+        // 获取需要添加的标记属性信息
+        const res = getKeyValue({ path: filePath, elementTag: node });
+        
+        // 根据返回类型添加标记属性到现有的props对象中
+        setObjAttrToObj(res, attrsObj);
+        // 将新创建的props对象设置为第二个参数
+        node.arguments[1] = attrsObj;
     } else {
-      // props参数存在的情况
-      // 获取需要添加的标记属性信息
-      const res = getKeyValue({ path: filePath, elementTag: node });
-      console.log(res);
-      // 根据返回类型添加标记属性到现有的props对象中
-      if (Array.isArray(res)) {
-        res.forEach(([tag, value]) => {
-          setAttr(tag, value, propsArg);
-        });
-      } else {
-        setAttr(res.tag, res.tagValue, propsArg);
-      }
+        // props参数存在的情况
+        // 获取需要添加的标记属性信息
+        const res = getKeyValue({ path: filePath, elementTag: node });
+        // 根据返回类型添加标记属性到现有的props对象中
+        setObjAttrToObj(res, propsArg);
     }
 }

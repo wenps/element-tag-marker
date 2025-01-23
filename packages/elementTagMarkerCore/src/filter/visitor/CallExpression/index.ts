@@ -1,7 +1,7 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-10-12 18:18:51
- * @LastEditTime: 2025-01-23 17:16:46
+ * @LastEditTime: 2025-01-23 18:05:41
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/filter/visitor/CallExpression/index.ts
  */
 import handleJsxDEV from "./core/jsxDEV";
@@ -31,9 +31,8 @@ export default function (path: any, filePath: string) {
   ) {
     handle_createElementVNode(node, filePath);
   }
-
   // 判断是否为react的createElement函数调用，处理webpack 打包的 react
-  if (node.callee && node.callee.type === "MemberExpression" && (node.callee.object.name === "react" && node.callee.property.name === "createElement")) {
+  if (node.callee && node.callee.type === "MemberExpression" && (node.callee.object.name === "React" && node.callee.property.name === "createElement")) {
     handle_createElementVNode(node, filePath);
   }
 }

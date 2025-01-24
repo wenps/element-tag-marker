@@ -1,3 +1,9 @@
+/*
+ * @Date: 2025-01-22 19:25:56
+ * @LastEditors: xiaoshan
+ * @LastEditTime: 2025-01-24 09:55:17
+ * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/filter/visitor/CallExpression/core/_c.ts
+ */
 import { getKeyValue, checkTag } from "src/utils";
 import { setObjAttrToObj } from "../utils";
 import * as t from "@babel/types";
@@ -69,3 +75,28 @@ export default function (node: any, filePath: string) {
       }
     }
 }
+
+// else if (t.isCallExpression(propsArg) && t.isIdentifier(propsArg.callee) && propsArg.callee.name === '_b') {
+//   // 获取_b函数的第一个参数
+//   const firstArg = propsArg.arguments[0];
+  
+//   if (t.isObjectExpression(firstArg)) {
+//     // 查找现有的attrs属性
+//     const existingAttrs = firstArg.properties.find(
+//       (prop): prop is t.ObjectProperty => t.isObjectProperty(prop) && t.isIdentifier(prop.key) && prop.key.name === "attrs"
+//     );
+
+//     if (existingAttrs && t.isObjectExpression(existingAttrs.value)) {
+//       // 如果已存在attrs属性,使用现有的对象
+//       setObjAttrToObj(res, existingAttrs.value);
+//     } else {
+//       // 如果不存在attrs属性,创建新的对象表达式
+//       const attrsObj = t.objectExpression([]);
+//       setObjAttrToObj(res, attrsObj);
+//       // 创建attrs属性并添加到第一个参数中
+//       const attrsProperty = t.objectProperty(t.identifier("attrs"), attrsObj);
+//       firstArg.properties.push(attrsProperty);
+//     }
+//   }
+
+// } 

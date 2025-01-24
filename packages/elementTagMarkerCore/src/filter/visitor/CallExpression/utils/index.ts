@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-22 19:23:56
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-23 17:19:51
+ * @LastEditTime: 2025-01-24 10:52:35
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/filter/visitor/CallExpression/utils/index.ts
  */
 
@@ -34,4 +34,15 @@ export function setObjAttrToObj(res: [string, string][] | { tag:string, tagValue
     // 单个标记属性直接添加
     setAttr(res.tag, res.tagValue, attrsObj);
   }
+}
+
+
+
+/**
+ * @description: 判断是否是Object.assign
+ * @param {any} node
+ * @return {*}
+ */
+export function checkIsObjectAssign(node: any){
+  return node.callee && node.callee.type === "MemberExpression" && (node.callee.object.name === "Object" && node.callee.property.name === "assign")
 }

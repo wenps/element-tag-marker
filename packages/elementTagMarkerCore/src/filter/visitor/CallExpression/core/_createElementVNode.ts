@@ -1,11 +1,11 @@
 /*
  * @Date: 2025-01-22 19:25:56
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-23 19:59:17
+ * @LastEditTime: 2025-01-24 11:02:40
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/filter/visitor/CallExpression/core/_createElementVNode.ts
  */
 import { getKeyValue, checkTag } from "src/utils";
-import { setObjAttrToObj } from "../utils";
+import { checkIsObjectAssign, setObjAttrToObj } from "../utils";
 import * as t from "@babel/types";
 
 /**
@@ -26,6 +26,7 @@ export default function (node: any, filePath: string) {
 
     // 获取props参数(第二个参数)
     let propsArg = node.arguments[1];
+    if(checkIsObjectAssign(propsArg)) return;
 
     // 处理props参数不存在或为null的情况
     if (!propsArg || t.isNullLiteral(propsArg)) {
@@ -39,6 +40,26 @@ export default function (node: any, filePath: string) {
         // 将新创建的props对象设置为第二个参数
         node.arguments[1] = attrsObj;
     } 
+    // 处理props参数为对象表达式的情况
+    // todo 后续要新增对象表达式类型判断，即构造一个立即调用函数
+    else if (t.isIdentifier(propsArg)) {
+        // props参数为绑定变量的情况
+        // 创建一个新的对象表达式用于存储标记属性
+        const attrsObj = t.objectExpression([]);
+        const res = getKeyValue({ path: filePath, elementTag: node });
+        
+        // 设置标记属性到对象中
+        setObjAttrToObj(res, attrsObj);
+        
+        // 使用 Object.assign 合并 propsArg 和 attrsObj
+        const mergedProps = t.callExpression(
+            t.memberExpression(t.identifier('Object'), t.identifier('assign')),
+            [propsArg, attrsObj]
+        );
+        
+        // 将合并后的对象设置为第二个参数
+        node.arguments[1] = mergedProps;
+    }
     // 处理props参数为绑定变量的情况
     else if (t.isCallExpression(propsArg) && t.isIdentifier(propsArg.callee) && propsArg.callee.name === '_mergeProps') {
         // 创建一个新的对象表达式用于存储标记属性

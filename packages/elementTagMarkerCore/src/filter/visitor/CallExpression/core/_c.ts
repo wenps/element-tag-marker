@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-22 19:25:56
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-02-05 17:08:36
+ * @LastEditTime: 2025-02-05 17:14:18
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/filter/visitor/CallExpression/core/_c.ts
  */
 import { getKeyValue, checkTag } from "src/utils";
@@ -30,7 +30,9 @@ export default function (node: any, filePath: string) {
         return (
           t.isCallExpression(node) &&
           t.isIdentifier(node.callee.property) &&
-          node.callee.property.name === "_b"
+          node.callee.property.name === "_b" &&
+          t.isIdentifier(node.callee.object) &&
+          node.callee.object.name === "_vm"
         );
       } catch (error) {
         return false;

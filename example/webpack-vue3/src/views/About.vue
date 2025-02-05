@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div v-bind="xx" class="about">
     <section class="about-hero">
       <h1>关于我们</h1>
       <p>用科技创新引领未来</p>
@@ -45,7 +45,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-
+const xx = ref({
+  name: 'element-tag-marker',
+  description: 'element-tag-marker'
+})
 const teamMembers = ref([
   {
     id: 1,

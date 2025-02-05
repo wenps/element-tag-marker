@@ -14,6 +14,7 @@
 * react vite
 * vue2 vite
 * vue3 vite
+* react webpack
 
 ## 特性
 

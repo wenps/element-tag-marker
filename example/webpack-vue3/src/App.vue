@@ -1,7 +1,7 @@
 <!--
  * @Date: 2025-01-23 13:44:37
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-23 18:15:40
+ * @LastEditTime: 2025-02-05 18:47:25
  * @FilePath: /element-tag-marker/example/webpack-vue3/src/App.vue
 -->
 <template>
@@ -16,7 +16,6 @@
         </router-link>
       </div>
     </nav>
-
     <router-view></router-view>
 
     <footer class="footer">
@@ -29,7 +28,7 @@
         <div class="footer-section">
           <h3>关注我们</h3>
           <div class="social-links">
-            <a href="#" target="_blank">微信</a>
+            <a href="#" target="_blank" xx="3212">微信</a>
             <a href="#" target="_blank">微博</a>
             <a href="#" target="_blank">GitHub</a>
           </div>

@@ -11,8 +11,9 @@
 
 ## Pass
 
-* react vite 
+* react vite
 * vue2 vite
+* vue3 vite
 
 ## 特性
 

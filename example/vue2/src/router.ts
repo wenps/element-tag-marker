@@ -4,11 +4,11 @@
  * @LastEditTime: 2025-01-22 11:02:55
  * @FilePath: /element-tag-marker/example/vue2/src/router.ts
  */
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Vue from 'vue';
+import Router from 'vue-router';
+import Home from './views/Home.vue';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
     mode: 'hash',
@@ -17,29 +17,31 @@ export default new Router({
         {
             path: '/',
             name: 'home',
-            component: Home
+            component: Home,
         },
         {
             path: '/products',
             name: 'products',
-            component: () => import('./views/Products.vue')
+            component: () => import('./views/Products.vue'),
         },
         {
             path: '/solutions',
             name: 'solutions',
-            component: () => import('./views/Solutions.vue')
+            component: () => import('./views/Solutions.vue'),
         },
         {
             path: '/about',
             name: 'about',
-            component: () => import('./views/About.vue')
+            component: () => import('./views/About.vue'),
         },
         {
             path: '/contact',
             name: 'contact',
-            component: () => import('./views/Contact.vue')
-        }
-    ]
-})
+            component: () => import('./views/Contact.vue'),
+        },
+    ],
+});
+
+ // element-tag-marker: 67v6b623
 
  // element-tag-marker: 67v6b623

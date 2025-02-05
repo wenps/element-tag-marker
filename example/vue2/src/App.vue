@@ -1,12 +1,12 @@
 <!--
  * @Author: xiaoshanwen
  * @Date: 2023-11-23 15:52:50
- * @LastEditTime: 2025-01-22 11:04:59
+ * @LastEditTime: 2025-02-05 16:24:16
  * @FilePath: /element-tag-marker/example/vue2/src/App.vue
 -->
 <template>
     <div   id="app">
-        <div   class="main">
+        <div  v-bind="xx"  class="main">
             <header class="header">
                 <div   class="logo">
                     <img
@@ -35,7 +35,11 @@
 export default {
     data() {
         return {
-            logoUrl: 'https://www.antdv.com/assets/logo.1ef800a8.svg'
+            logoUrl: 'https://www.antdv.com/assets/logo.1ef800a8.svg',
+            xx: {
+                name: 'element-tag-marker',
+                description: 'element-tag-marker'
+            }
         }
     },
     methods: {

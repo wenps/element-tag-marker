@@ -1,13 +1,25 @@
 /*
  * @Date: 2024-12-07 16:03:52
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-02-06 18:45:21
+ * @LastEditTime: 2025-02-06 19:10:52
  * @FilePath: /element-tag-marker/script/build.js
  */
 // @ts-check
-const shell = require('shelljs')
-const argMap = require('./utils').parseArgsToMap()
-const { select } = require('@inquirer/prompts')
+import shell from 'shelljs'; // 使用 import 引入 shelljs 模块
+import { select } from '@inquirer/prompts'; // 使用 import 引入 select 函数
+
+const parseArgsToMap = () => {
+    const args = new Map()
+
+    process.argv.forEach(arg => {
+        const [key, value] = arg.split('=')
+        args.set(key, value)
+    })
+    return args
+}
+
+// 解析命令行参数
+const argMap = parseArgsToMap();
 
 const run = async () => {
     // 自带指令 d 标识开发模式

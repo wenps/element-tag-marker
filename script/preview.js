@@ -1,3 +1,9 @@
+/*
+ * @Date: 2025-02-06 16:17:07
+ * @LastEditors: xiaoshan
+ * @LastEditTime: 2025-02-06 18:46:20
+ * @FilePath: /element-tag-marker/script/preview.js
+ */
 // @ts-check
 const shell = require('shelljs')
 const { select } = require('@inquirer/prompts')
@@ -25,7 +31,7 @@ const run = async () => {
     })
 
     shell.cd(`example/${example}`)
-    shell.exec('pnpm preview')
+    shell.exec('pnpm run dev')
 }
 
 run()

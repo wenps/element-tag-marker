@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-12-07 16:03:52
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-02-06 18:41:57
+ * @LastEditTime: 2025-02-06 18:45:21
  * @FilePath: /element-tag-marker/script/build.js
  */
 // @ts-check
@@ -10,6 +10,7 @@ const argMap = require('./utils').parseArgsToMap()
 const { select } = require('@inquirer/prompts')
 
 const run = async () => {
+    // 自带指令 d 标识开发模式
     const isDev = argMap.has('d')
     const runBuild = () => {
         const buildCmd = 'pnpm build' + (isDev ? ' -w' : '')
@@ -23,6 +24,7 @@ const run = async () => {
         }
     })
     let dir
+    // 自带指令 p 标识指定插件类型
     if (argMap.has('p')) {
         dir = choices.find(choice => choice.name === argMap.get('p'))?.value
     }

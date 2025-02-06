@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-20 18:43:35
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-23 17:12:31
+ * @LastEditTime: 2025-02-06 10:34:07
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/type/index.ts
  */
 
@@ -14,8 +14,8 @@ export enum TagType {
 // 基础配置类型接口
 export interface BaseOption {
     tagType: TagType;
-    excludedPath: string[];
-    includePath: RegExp[];
+    excludedPath: (string | RegExp)[];
+    includePath: (string | RegExp)[];
     includeTag: string[];
     excludedTag: string[];
     hashFunction: (path: string) => string;

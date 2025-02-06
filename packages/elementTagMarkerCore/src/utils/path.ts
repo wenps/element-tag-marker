@@ -1,8 +1,8 @@
 /*
  * @Date: 2025-01-13 18:31:37
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-13 18:31:39
- * @FilePath: /element-tag-marker/packages/elementTagMarkerCorePlugin/src/utils/path.ts
+ * @LastEditTime: 2025-02-06 10:25:49
+ * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/utils/path.ts
  */
 /**
  * @description: 用于判断提供的值是否符合正则表达式数组中的任一规则，符合则跳过
@@ -10,7 +10,7 @@
  * @param {*} regexArray
  * @return {*}
  */
-export function checkAgainstRegexArray(value: string, regexArray: string[] | RegExp[]) {
+export function checkAgainstRegexArray(value: string, regexArray: (string | RegExp)[]) {
     for (let i = 0; i < regexArray.length; i++) {
         const regex = typeof regexArray[i] === 'string' ? new RegExp(regexArray[i]) : regexArray[i]
         if ((regex as RegExp).test(value)) {

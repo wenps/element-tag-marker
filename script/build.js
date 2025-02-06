@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-12-07 16:03:52
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-09 19:22:15
+ * @LastEditTime: 2025-02-06 18:41:57
  * @FilePath: /element-tag-marker/script/build.js
  */
 // @ts-check
@@ -19,7 +19,7 @@ const run = async () => {
     const choices = ['vite', 'webpack'].map(type => {
         return {
             name: type,
-            value: type + 'PluginsAutoI18n' // 这里用了拼接，要留意后续目录是否变更
+            value: type + 'ElementTagMarkerPlugin' // 这里用了拼接，要留意后续目录是否变更
         }
     })
     let dir
@@ -33,7 +33,7 @@ const run = async () => {
             default: choices[0].value
         })
     }
-    shell.cd('autoI18nPluginCore')
+    shell.cd('packages/elementTagMarkerCore')
     runBuild()
 
     shell.cd('..')

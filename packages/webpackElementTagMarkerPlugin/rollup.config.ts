@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-23 14:28:42
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-23 15:20:47
+ * @LastEditTime: 2025-02-07 18:08:16
  * @FilePath: /element-tag-marker/packages/webpackElementTagMarkerPlugin/rollup.config.ts
  */
 import { defineConfig } from 'rollup'
@@ -16,7 +16,7 @@ function resolve(filePath: string) {
 }
 
 const input = resolve('./src/index.ts')
-const loaderInput = resolve('./src/Loader/index.ts')
+const loaderInput = resolve('./src/customLoader/index.ts')
 
 const buildConfig = defineConfig({
     input: input,
@@ -41,11 +41,11 @@ const loaderBuildConfig = defineConfig({
     input: loaderInput,
     output: [
         {
-            file: resolve('./dist/Loader/index.mjs'),
+            file: resolve('./dist/customLoader/index.mjs'),
             format: 'esm'
         },
         {
-            file: resolve('./dist/Loader/index.cjs'),
+            file: resolve('./dist/customLoader/index.cjs'),
             format: 'cjs'
         }
     ],
@@ -63,7 +63,7 @@ const loaderBuildConfig = defineConfig({
 const loaderDtsConfig = defineConfig({
     input: loaderInput,
     output: {
-        file: resolve('./dist/Loader/index.d.ts'),
+        file: resolve('./dist/customLoader/index.d.ts'),
         format: 'esm'
     },
     plugins: [

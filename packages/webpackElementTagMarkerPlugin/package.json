@@ -1,6 +1,6 @@
 {
     "name": "webpack-element-tag-marker-plugin",
-    "version": "0.0.12",
+    "version": "1.0.0",
     "description": "Webpack plugin for marking elements with unique tags",
     "keywords": [
         "webpack",

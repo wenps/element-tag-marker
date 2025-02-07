@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-06 18:58:57
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-02-07 11:30:55
+ * @LastEditTime: 2025-02-07 21:05:28
  * @FilePath: /element-tag-marker/script/upload.js
  */
 // script/upload.js
@@ -58,7 +58,7 @@ const run = async () => {
     console.log(chalk.green`\n打包完成!\n`)
 
     // 特性版本
-    const versionType = VersionTypeEnum.PATCH
+    const versionType = process.argv[2] || VersionTypeEnum.PATCH;
 
     console.log(chalk.green`\n开始修改版本号\n`)
 

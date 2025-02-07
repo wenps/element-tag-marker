@@ -399,15 +399,9 @@ importers:
       '@babel/traverse':
         specifier: ^7.26.4
         version: 7.26.5
-      json-format:
-        specifier: ^1.0.1
-        version: 1.0.1
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
-      tunnel:
-        specifier: 0.0.6
-        version: 0.0.6
     devDependencies:
       '@babel/types':
         specifier: ^7.23.0
@@ -424,18 +418,12 @@ importers:
       '@types/babel__core':
         specifier: ^7.20.3
         version: 7.20.5
-      '@types/crypto-js':
-        specifier: ^4.2.2
-        version: 4.2.2
       '@types/lodash':
         specifier: ^4.17.4
         version: 4.17.7
       '@types/node':
         specifier: ^20.3.3
         version: 20.14.15
-      '@types/tunnel':
-        specifier: ^0.0.7
-        version: 0.0.7
       babel-plugin-import:
         specifier: ^1.13.6
         version: 1.13.8
@@ -454,19 +442,16 @@ importers:
 
   packages/viteElementTagMarkerPlugin:
     dependencies:
-      '@babel/traverse':
-        specifier: ^7.26.4
-        version: 7.26.4
       element-tag-marker-core:
         specifier: workspace:*
         version: link:../elementTagMarkerCore
-      json-format:
-        specifier: ^1.0.1
-        version: 1.0.1
     devDependencies:
       '@babel/core':
         specifier: ^7.23.2
         version: 7.26.0
+      '@babel/traverse':
+        specifier: ^7.26.4
+        version: 7.26.4
       '@rollup/plugin-typescript':
         specifier: ^11.1.5
         version: 11.1.6(rollup@4.20.0)(tslib@2.6.3)(typescript@5.7.2)
@@ -494,22 +479,16 @@ importers:
 
   packages/webpackElementTagMarkerPlugin:
     dependencies:
+      element-tag-marker-core:
+        specifier: workspace:*
+        version: link:../elementTagMarkerCore
+    devDependencies:
       '@babel/core':
         specifier: ^7.23.2
         version: 7.26.0
       '@babel/traverse':
         specifier: ^7.26.4
         version: 7.26.5
-      element-tag-marker-core:
-        specifier: workspace:*
-        version: link:../elementTagMarkerCore
-      json-format:
-        specifier: ^1.0.1
-        version: 1.0.1
-      webpack:
-        specifier: ^5.96.1
-        version: 5.97.1(webpack-cli@5.1.4)
-    devDependencies:
       '@rollup/plugin-typescript':
         specifier: ^11.1.5
         version: 11.1.6(rollup@4.20.0)(tslib@2.6.3)(typescript@5.7.2)
@@ -540,6 +519,9 @@ importers:
       typescript:
         specifier: ^5.1.6
         version: 5.7.2
+      webpack:
+        specifier: ^5.96.1
+        version: 5.97.1(webpack-cli@5.1.4)
       webpack-sources:
         specifier: ^3.2.3
         version: 3.2.3
@@ -1879,55 +1861,46 @@ packages:
     resolution: {integrity: sha512-jMYvxZwGmoHFBTbr12Xc6wOdc2xA5tF5F2q6t7Rcfab68TT0n+r7dgawD4qhPEvasDsVpQi+MgDzj2faOLsZjA==}
     cpu: [arm]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-arm-musleabihf@4.20.0':
     resolution: {integrity: sha512-1asSTl4HKuIHIB1GcdFHNNZhxAYEdqML/MW4QmPS4G0ivbEcBr1JKlFLKsIRqjSwOBkdItn3/ZDlyvZ/N6KPlw==}
     cpu: [arm]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-linux-arm64-gnu@4.20.0':
     resolution: {integrity: sha512-COBb8Bkx56KldOYJfMf6wKeYJrtJ9vEgBRAOkfw6Ens0tnmzPqvlpjZiLgkhg6cA3DGzCmLmmd319pmHvKWWlQ==}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-arm64-musl@4.20.0':
     resolution: {integrity: sha512-+it+mBSyMslVQa8wSPvBx53fYuZK/oLTu5RJoXogjk6x7Q7sz1GNRsXWjn6SwyJm8E/oMjNVwPhmNdIjwP135Q==}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-linux-powerpc64le-gnu@4.20.0':
     resolution: {integrity: sha512-yAMvqhPfGKsAxHN8I4+jE0CpLWD8cv4z7CK7BMmhjDuz606Q2tFKkWRY8bHR9JQXYcoLfopo5TTqzxgPUjUMfw==}
     cpu: [ppc64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-riscv64-gnu@4.20.0':
     resolution: {integrity: sha512-qmuxFpfmi/2SUkAw95TtNq/w/I7Gpjurx609OOOV7U4vhvUhBcftcmXwl3rqAek+ADBwSjIC4IVNLiszoj3dPA==}
     cpu: [riscv64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-s390x-gnu@4.20.0':
     resolution: {integrity: sha512-I0BtGXddHSHjV1mqTNkgUZLnS3WtsqebAXv11D5BZE/gfw5KoyXSAXVqyJximQXNvNzUo4GKlCK/dIwXlz+jlg==}
     cpu: [s390x]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-x64-gnu@4.20.0':
     resolution: {integrity: sha512-y+eoL2I3iphUg9tN9GB6ku1FA8kOfmF4oUEWhztDJ4KXJy1agk/9+pejOuZkNFhRwHAOxMsBPLbXPd6mJiCwew==}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-x64-musl@4.20.0':
     resolution: {integrity: sha512-hM3nhW40kBNYUkZb/r9k2FKK+/MnKglX7UYd4ZUy5DJs8/sMsIbqWK2piZtVGE3kcXVNj3B2IrUYROJMMCikNg==}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-win32-arm64-msvc@4.20.0':
     resolution: {integrity: sha512-psegMvP+Ik/Bg7QRJbv8w8PAytPA7Uo8fpFjXyCRHWm6Nt42L+JtoqH8eDQ5hRP7/XW2UiIriy1Z46jf0Oa1kA==}
@@ -1979,9 +1952,6 @@ packages:
 
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
-
-  '@types/crypto-js@4.2.2':
-    resolution: {integrity: sha512-sDOLlVbHhXpAUAL0YHDUUwDZf3iN4Bwi4W6a0W0b+QcAezUbRtH4FVb+9J4h+XFPW7l/gQ9F8qC7P+Ec4k8QVQ==}
 
   '@types/eslint-scope@3.7.7':
     resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
@@ -2092,9 +2062,6 @@ packages:
 
   '@types/source-list-map@0.1.6':
     resolution: {integrity: sha512-5JcVt1u5HDmlXkwOD2nslZVllBBc7HDuOICfiZah2Z0is8M8g+ddAEawbmd3VjedfDHBzxCaXLs07QEmb7y54g==}
-
-  '@types/tunnel@0.0.7':
-    resolution: {integrity: sha512-VYKjZSmb2PvUwXoux4Gy4LAk7kzOB1ktkjyL4lxvpkqL2adgR+Qrh/yFyWluvJgIXWFicqs7XuzPI2NbTO/r3Q==}
 
   '@types/webpack-env@1.18.5':
     resolution: {integrity: sha512-wz7kjjRRj8/Lty4B+Kr0LN6Ypc/3SymeCCGSbaXp2leH0ZVg/PriNiOwNj4bD4uphI7A8NXS4b6Gl373sfO5mA==}
@@ -9771,8 +9738,6 @@ snapshots:
     dependencies:
       '@types/node': 20.14.15
 
-  '@types/crypto-js@4.2.2': {}
-
   '@types/eslint-scope@3.7.7':
     dependencies:
       '@types/eslint': 9.6.1
@@ -9897,10 +9862,6 @@ snapshots:
       '@types/node': 20.14.15
 
   '@types/source-list-map@0.1.6': {}
-
-  '@types/tunnel@0.0.7':
-    dependencies:
-      '@types/node': 20.14.15
 
   '@types/webpack-env@1.18.5': {}
 

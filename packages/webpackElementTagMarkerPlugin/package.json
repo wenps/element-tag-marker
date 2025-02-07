@@ -3,55 +3,55 @@
     "version": "0.0.9",
     "description": "Webpack plugin for marking elements with unique tags",
     "keywords": [
-        "webpack",
-        "plugin",
-        "element",
-        "tag",
-        "marker"
+      "webpack",
+      "plugin",
+      "element",
+      "tag",
+      "marker"
     ],
     "exports": {
-        "require": "./dist/index.cjs",
-        "default": "./dist/index.mjs"
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.mjs"
     },
     "types": "./dist/index.d.ts",
     "files": [
-        "dist",
-        "README*"
+      "dist",
+      "README*"
     ],
     "scripts": {
-        "build": "rollup -c ./rollup.config.ts --configPlugin typescript"
+      "build": "rollup -c ./rollup.config.ts --configPlugin typescript"
     },
     "repository": {
-        "type": "git",
-        "url": "git+https://github.com/wenps/element-tag-marker.git"
+      "type": "git",
+      "url": "https://github.com/wenps/element-tag-marker.git"
     },
     "author": "wenps",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/wenps/element-tag-marker/issues"
+      "url": "https://github.com/wenps/element-tag-marker/issues"
     },
     "homepage": "https://github.com/wenps/element-tag-marker#readme",
     "dependencies": {
-        "@babel/core": "^7.23.2",
-        "@babel/traverse": "^7.26.4",
-        "element-tag-marker-core": "workspace:*",
-        "json-format": "^1.0.1",
-        "webpack": "^5.96.1"
+      "element-tag-marker-core": "workspace:*"
     },
     "devDependencies": {
-        "@rollup/plugin-typescript": "^11.1.5",
-        "@types/babel__core": "^7.20.3",
-        "@types/node": "^20.3.3",
-        "@types/webpack": "^5.28.5",
-        "@types/webpack-env": "^1.18.5",
-        "@types/webpack-sources": "^3.2.3",
-        "rollup": "^4.3.0",
-        "rollup-plugin-dts": "^6.1.0",
-        "rollup-plugin-node-externals": "^7.1.2",
-        "typescript": "^5.1.6",
-        "webpack-sources": "^3.2.3"
+      "@rollup/plugin-typescript": "^11.1.5",
+      "@types/babel__core": "^7.20.3",
+      "@types/node": "^20.3.3",
+      "@types/webpack": "^5.28.5",
+      "@types/webpack-env": "^1.18.5",
+      "@types/webpack-sources": "^3.2.3",
+      "@babel/core": "^7.23.2",
+      "@babel/traverse": "^7.26.4",
+      "rollup": "^4.3.0",
+      "rollup-plugin-dts": "^6.1.0",
+      "rollup-plugin-node-externals": "^7.1.2",
+      "typescript": "^5.1.6",
+      "webpack": "^5.96.1",
+      "webpack-sources": "^3.2.3"
     },
     "peerDependencies": {
-        "webpack": "^5.0.0"
+      "webpack": "^5.0.0"
     }
-}
+  }
+  

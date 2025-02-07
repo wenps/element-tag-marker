@@ -1,54 +1,53 @@
 {
     "name": "vite-element-tag-marker-plugin",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "description": "A Vite plugin for marking elements with unique tags",
     "keywords": [
-      "vite",
-      "plugin",
-      "element",
-      "tag",
-      "marker",
-      "vite-plugin"
+        "vite",
+        "plugin",
+        "element",
+        "tag",
+        "marker",
+        "vite-plugin"
     ],
     "exports": {
-      "require": "./dist/index.cjs",
-      "default": "./dist/index.mjs"
+        "require": "./dist/index.cjs",
+        "default": "./dist/index.mjs"
     },
     "types": "./dist/index.d.ts",
     "files": [
-      "dist",
-      "README*"
+        "dist",
+        "README*"
     ],
     "scripts": {
-      "build": "rollup -c ./rollup.config.ts --configPlugin typescript"
+        "build": "rollup -c ./rollup.config.ts --configPlugin typescript"
     },
     "repository": {
-      "type": "git",
-      "url": "https://github.com/wenps/element-tag-marker.git"
+        "type": "git",
+        "url": "https://github.com/wenps/element-tag-marker.git"
     },
     "author": "wenps",
     "license": "MIT",
     "bugs": {
-      "url": "https://github.com/wenps/element-tag-marker/issues"
+        "url": "https://github.com/wenps/element-tag-marker/issues"
     },
     "homepage": "https://github.com/wenps/element-tag-marker#readme",
     "dependencies": {
-      "element-tag-marker-core": "workspace:*"
+        "element-tag-marker-core": "workspace:*"
     },
     "devDependencies": {
-      "@babel/core": "^7.23.2",
-      "@babel/traverse": "^7.26.4",
-      "@rollup/plugin-typescript": "^11.1.5",
-      "@types/babel__core": "^7.20.3",
-      "@types/node": "^20.3.3",
-      "rollup": "^4.3.0",
-      "rollup-plugin-dts": "^6.1.0",
-      "rollup-plugin-node-externals": "^7.1.2",
-      "typescript": "^5.1.6",
-      "vite": "^2.8.6"
+        "@babel/core": "^7.23.2",
+        "@babel/traverse": "^7.26.4",
+        "@rollup/plugin-typescript": "^11.1.5",
+        "@types/babel__core": "^7.20.3",
+        "@types/node": "^20.3.3",
+        "rollup": "^4.3.0",
+        "rollup-plugin-dts": "^6.1.0",
+        "rollup-plugin-node-externals": "^7.1.2",
+        "typescript": "^5.1.6",
+        "vite": "^2.8.6"
     },
     "peerDependencies": {
-      "vite": "^2.0.0"
+        "vite": "^2.0.0"
     }
-  }
-  
+}

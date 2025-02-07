@@ -1,6 +1,6 @@
 {
     "name": "vite-element-tag-marker-plugin",
-    "version": "0.0.1",
+    "version": "0.0.9",
     "description": "Vite plugin for marking elements with unique tags",
     "keywords": [
         "vite",

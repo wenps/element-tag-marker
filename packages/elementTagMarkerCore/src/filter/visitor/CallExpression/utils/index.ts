@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-22 19:23:56
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-24 10:52:35
+ * @LastEditTime: 2025-02-07 16:40:18
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/filter/visitor/CallExpression/utils/index.ts
  */
 
@@ -12,11 +12,24 @@ import * as t from "@babel/types";
  * @param {string} value - 标记属性值
  */
 export const setAttr = (tag: string, value: string, propsArg: t.ObjectExpression) => {
-  const tagProperty = t.objectProperty(
-    t.identifier(tag),
-    t.stringLiteral(value)
-  );
-  propsArg.properties.push(tagProperty);
+  // 如果值是不是存在当前对象中
+  const targetNode = propsArg.properties.find((item) => {
+    if (t.isObjectProperty(item) && t.isIdentifier(item.key) && item.key.name === tag) {
+      return true;
+    }
+  })
+  if (targetNode) {
+    // 如果存在当前对象中
+    if (t.isObjectProperty(targetNode)) {
+      targetNode.value = t.stringLiteral(value);
+    }
+  } else {
+    const tagProperty = t.objectProperty(
+      t.identifier(tag),
+      t.stringLiteral(value)
+    );
+    propsArg.properties.push(tagProperty);
+  }
 };
 
 /**

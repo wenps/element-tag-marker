@@ -1,7 +1,7 @@
 /*
  * @Author: 小山
  * @Date: 2023-08-10 17:12:17
- * @LastEditTime: 2025-01-23 10:17:27
+ * @LastEditTime: 2025-02-08 09:54:17
  * @FilePath: /element-tag-marker/packages/viteElementTagMarkerPlugin/src/index.ts
  * @Description: Vite插件，用于在构建过程中为元素添加标记
  */
@@ -9,6 +9,7 @@
 import { Plugin } from "vite";
 import * as babel from "@babel/core";
 import {
+  option,
   OptionInfo,
   initOption,
   filter,
@@ -38,6 +39,11 @@ export default function viteElementTagMarkerPlugin(optionInfo?: OptionInfo): Plu
      * @returns {string} 转换后的代码
      */
     async transform(code: string, path: string) {
+
+      // 如果在生产环境，且标注生产环境不生效，就直接跳过
+      if (process.env.NODE_ENV === "production" && !option.toProd) {
+        return code;
+      }
       
       
       // 检查文件类型是否符合要求

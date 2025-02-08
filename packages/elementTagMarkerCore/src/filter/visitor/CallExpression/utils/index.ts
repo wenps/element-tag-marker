@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-22 19:23:56
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-02-07 16:40:18
+ * @LastEditTime: 2025-02-07 21:17:26
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/filter/visitor/CallExpression/utils/index.ts
  */
 
@@ -19,11 +19,12 @@ export const setAttr = (tag: string, value: string, propsArg: t.ObjectExpression
     }
   })
   if (targetNode) {
-    // 如果存在当前对象中
+    // 如果当前tag存在当前对象中，那就直接改
     if (t.isObjectProperty(targetNode)) {
       targetNode.value = t.stringLiteral(value);
     }
   } else {
+    // 如果不存在就加进去
     const tagProperty = t.objectProperty(
       t.identifier(tag),
       t.stringLiteral(value)

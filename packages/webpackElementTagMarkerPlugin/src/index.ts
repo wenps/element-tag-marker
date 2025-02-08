@@ -29,9 +29,15 @@ export default class webpackElementTagMarkerPlugin {
    * @param compiler Webpack 编译器实例
    */
   apply(compiler: webpack.Compiler) {
-    // 清空缓存，每次启动 Webpack 都会重置
-    this.fileCache = new Map();
+    
+    // 清空缓存，每次启动 Webpack 都会重置 Map 表
+    this.fileCache.clear();
 
+    // 判断当前是否为生产环境，如果是生产环境，且不在生产环境产生功能时，不处理标记
+    if (compiler.options.mode === "production" && !option.toProd) {
+      return;
+    }
+    
     // 添加 Loader 时共享缓存
     compiler.hooks.beforeCompile.tapAsync(
       PLUGIN_NAME,
@@ -82,7 +88,7 @@ export default class webpackElementTagMarkerPlugin {
         }
       });
 
-      console.log("✅ fileCache 更新完成");
+      console.log("✅ 文件缓存 更新完成");
     });
   }
 }

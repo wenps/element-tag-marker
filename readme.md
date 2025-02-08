@@ -36,6 +36,24 @@
 
 ---
 
+## 🎯 Why Do You Need It?
+
+If you want to improve development efficiency and reduce wasted time on debugging and maintenance, then **Element Tag Marker** is the solution tailored for you.
+
+### Imagine These Scenarios:
+
+1. **🔍 Quickly Locate Issues**:  
+   When project code grows larger, it becomes extremely difficult to locate specific code snippets. With Element Tag Marker, you can add unique tags to elements, making it possible to reverse-lookup the code file by its tag. Within seconds, you can pinpoint the target code without wasting time digging through directories.
+
+2. **📌 Clear Module Maintenance**:  
+   By adding tags to specific modules, you can not only mark their origin but also indicate under which environments they are applied, such as "Development Mode Logic" or "Production Mode Core Logic".  
+   If code coupling issues arise, tags allow you to instantly identify the module's source and responsibility, making it easier to decouple and reducing the risk of incorrect modifications.
+
+3. **⚡ Accelerate Debugging**:  
+   In large collaborative projects, debugging different modules can be time-consuming and challenging. With precise tags, you can quickly associate debug tool outputs with specific code files and locations. This significantly speeds up the debugging process, making each bug fix or problem resolution faster and more accurate. ✨
+
+---
+
 ## 📦 Installation
 
 Install the Webpack or Vite plugin via npm:
@@ -67,6 +85,23 @@ Or use Yarn:
 ```bash
 yarn add vite-element-tag-marker-plugin --dev
 ```
+
+---
+
+## 🔢 Parameter Configuration
+| Parameter Name   | Type                                                      | Default Value           | Required | Description                                                                                                                                   |
+|------------------|-----------------------------------------------------------|-------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| `tagType`        | `enum` (`hash` \| `path` \| `function`)                   | `hash`                  | ✔️       | Type of the tag, supports three types: `hash`, `path`, `function`. The plugin will generate the tag value based on the specified type.        |
+| `tagKey`         | `string`                                                  | `'tag'`                 | ✔️       | The key of the tag, used to identify the tag in the file/element attribute.                                                                   |
+| `excludedPath`   | `(string \| RegExp)[]`                                    | `[]`                    | ❌       | Files or paths to exclude, can be strings or regular expressions, e.g., `node_modules`, `dist`, etc. Defaults to not excluding any paths.     |
+| `includePath`    | `(string \| RegExp)[]`                                    | `[/src\//]`             | ✔️       | Files or paths to include, can be strings or regular expressions. Defaults to including all files under the `src` directory. Note: In webpack, the inclusion range should be carefully controlled and not broadly open. If you need to operate files in `node_modules`, ensure accuracy and avoid operating on the packed files of the `vue` source package.
+| `includeTag`     | `string[]`                                                | `[]`                    | ❌       | List of tags to include, when empty, it includes all tags.                                                                                    |
+| `excludedTag`    | `string[]`                                                | `[]`                    | ❌       | List of tags to exclude, takes precedence over `includeTag`.                                                                                  |
+| `hashFunction`   | `(path: string) => string`                                | `--`                    | ❌       | Function to generate the hash value for the tag. By default, it generates a hash based on the file path string. It accepts a path parameter and returns a hash value. |
+| `toProd`         | `boolean`                                                 | `false`                 | ❌       | Whether to trigger the functionality in production environments.                                                                              |
+| `writeToFile`    | `false \| hash \| path`                                   | `false`                 | ❌       | Whether to write the tag value into the original file. Only supported for `hash` and `path` types. For `hash` or `path`, the plugin converts the value into the respective identifier and writes it into the original file. |
+| `tagPrefix`      | `string`                                                  | `''`                    | ❌       | Tag prefix used to differentiate tags from different projects, only effective for `hash` and `path` types.                                    |
+| `tagFunction`    | `(path: string, elementTag: Record<string, any>, option) => {tag: string, tagValue: string} \| ([tag: string, value: string][])` | `() => [['', '']]` | ❌       | The tag generation function, generating tags based on custom logic, can return an object `{tag, tagValue}` or an array of tags. The function accepts file path, element tag AST node, and the complete configuration item as parameters. |
 
 ---
 

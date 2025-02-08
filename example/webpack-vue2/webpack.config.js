@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-06 16:17:56
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-02-06 18:14:38
+ * @LastEditTime: 2025-02-08 11:06:33
  * @FilePath: /element-tag-marker/example/webpack-vue2/webpack.config.js
  */
 const path = require('path');
@@ -43,7 +43,7 @@ module.exports = {
     new webpackElementTagMarkerPlugin({
       option: {
           writeToFile: 'hash',
-          tagType: 'hash'
+          tagType: 'path'
       }
   })
   ],

@@ -29,7 +29,6 @@ export default class webpackElementTagMarkerPlugin {
    * @param compiler Webpack 编译器实例
    */
   apply(compiler: webpack.Compiler) {
-    
     // 清空缓存，每次启动 Webpack 都会重置 Map 表
     this.fileCache.clear();
 
@@ -37,7 +36,7 @@ export default class webpackElementTagMarkerPlugin {
     if (compiler.options.mode === "production" && !option.toProd) {
       return;
     }
-    
+
     // 添加 Loader 时共享缓存
     compiler.hooks.beforeCompile.tapAsync(
       PLUGIN_NAME,
@@ -46,9 +45,9 @@ export default class webpackElementTagMarkerPlugin {
         const hasCustomLoader = (rule: any) =>
           rule.use &&
           Array.isArray(rule.use) &&
-          rule.use.some(({ loader }: { loader: string }) =>
-            loader.includes("customLoader/index.cjs")
-          );
+          rule.use.some(({ loader }: { loader: string }) => {
+            loader && loader.includes("customLoader/index.cjs");
+          });
 
         // 添加自定义 Loader 到 Webpack 配置
         if (

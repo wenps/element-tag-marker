@@ -1,64 +1,68 @@
-
 # 🌟 Element Tag Marker
 
-## 📖 简介
+## 🌐 Language
 
-`Element Tag Marker` 是一个用于为前端项目中的元素添加标记的工具库。支持 Vue2/3、React，并提供 Webpack 和 Vite 插件。
+- 🇨🇳 [Chinese](readme_cn.md)
+- 🇬🇧 [English](readme.md)
 
-- 🚀 **支持多种前端框架**（Vue、React）
-- 📦 **支持主流构建工具**（Webpack、Vite）
-- 🎨 **支持多种标记类型**（hash、path、function）
-- 🔧 **支持自定义标记规则和过滤规则**
-- 📝 **支持将标记写入源文件**
-- ♻️ **提供缓存策略，优化开发体验**
+## 📖 Introduction
 
-🎯 **目标**：为前端开发人员提供一种简单、高效、可维护的标记方案。
+`Element Tag Marker` is a utility library for adding tags to elements in front-end projects. It supports Vue2/3 and React, and provides Webpack and Vite plugins.
 
-🔗 **GitHub 地址**：[https://github.com/wenps/element-tag-marker](https://github.com/wenps/element-tag-marker)
+- 🚀 **Supports Multiple Front-end Frameworks**: Vue, React
+- 📦 **Supports Main Build Tools**: Webpack, Vite
+- 🎨 **Supports Multiple Tag Types**: hash, path, function
+- 🔧 **Supports Custom Tag Rules and Filter Rules**
+- 📝 **Supports Writing Tags to Source Files**
+- ♻️ **Provides Caching Strategy to Optimize Development Experience**
 
-🚀 **欢迎点 🌟 Star！**
+🎯 **Goal**: To provide a simple, efficient, and maintainable tagging solution for front-end developers.
 
----
+🔗 **GitHub Address**: [https://github.com/wenps/element-tag-marker](https://github.com/wenps/element-tag-marker)
 
-## 🌟 功能
-
-- **支持框架** 😎：兼容 Vue2/3 和 React。
-- **构建工具支持** 🔧：适配 Webpack 和 Vite。
-- **可自定义标签生成** 🏷️：
-  - 支持基于哈希算法或自定义函数生成标签，生成标签时支持传入路径参数以及自定义参数。
-  - 支持自定义标签生成规则，允许通过配置包含或排除特定路径及标签。
-- **项目标签区分** ✨：为标签添加工程化的独立前缀。
-- **灵活的文件处理** 📂：支持将标记值写入原始文件，便于后续跟踪。
+🚀 **Don’t forget to Star us 🌟!**
 
 ---
 
-## 📦 安装
+## 🌟 Features
 
-分别通过 npm 安装 Webpack 或 Vite 插件：
+- **Framework Support** 😎: Compatible with Vue2/3 and React.
+- **Build Tool Support** 🔧: Compatible with Webpack and Vite.
+- **Customizable Tag Generation** 🏷️:
+  - Supports generating tags based on hash algorithms or custom functions. Tags can include path parameters and custom parameters.
+  - Supports custom tag generation rules, allowing configuration to include or exclude specific paths and tags.
+- **Project Tag Differentiation** ✨: Adds project-specific prefixes to tags.
+- **Flexible File Handling** 📂: Supports writing tag values to original files for easy tracking.
 
-### Webpack 插件安装
+---
 
-通过 npm 安装：
+## 📦 Installation
+
+Install the Webpack or Vite plugin via npm:
+
+### Webpack Plugin Installation
+
+Install via npm:
 
 ```bash
 npm install webpack-element-tag-marker-plugin --save-dev
 ```
 
-或使用 Yarn：
+Or use Yarn:
 
 ```bash
 yarn add webpack-element-tag-marker-plugin --dev
 ```
 
-### Vite 插件安装
+### Vite Plugin Installation
 
-通过 npm 安装：
+Install via npm:
 
 ```bash
 npm install vite-element-tag-marker-plugin --save-dev
 ```
 
-或使用 Yarn：
+Or use Yarn:
 
 ```bash
 yarn add vite-element-tag-marker-plugin --dev
@@ -66,9 +70,9 @@ yarn add vite-element-tag-marker-plugin --dev
 
 ---
 
-## 🛠️ 配置示例
+## 🛠️ Configuration Examples
 
-### Webpack 配置（Vue2 示例）
+### Webpack Configuration (Vue2 Example)
 
 ```javascript
 const path = require('path');
@@ -123,7 +127,7 @@ module.exports = {
 };
 ```
 
-### Vite 配置（Vue3 示例）
+### Vite Configuration (Vue3 Example)
 
 ```typescript
 import path from 'path'
@@ -158,58 +162,60 @@ export default defineConfig({
 
 ---
 
-## ⚙️ 机制介绍
+## ⚙️ Mechanism
 
-- **解析与处理**：这个插件是通过 Babel 对各个前端框架解析后的代码进行处理来实现新增功能的。通过观察编译后的源码，可以在合适的位置添加属性以实现标签功能。这对 Vue2/3 和 React 的 Webpack 和 Vite 产物均适用。
+- **Parsing and Processing**: This plugin uses Babel to process the parsed code of each front-end framework to implement new features. By observing the compiled code, attributes can be added at the right place to achieve tag functionality. This applies to both Vue2/3 and React projects built with Webpack and Vite.
   
-- **使用 WriteToFile 功能**：可以将当前文件的标签写入原文件。通过在项目中搜索标签来找到对应文件（这也是此插件的初衷，为了在大量复制粘贴的代码中快速找到目标文件）。
+- **Using WriteToFile**: You can write the current file's tag into the original file. By searching for tags within the project, you can quickly locate the corresponding file (the primary purpose of this plugin).
 
-- **缓存处理**：插件维护了代码映射表，当文件未改变时直接读取缓存，提高开发体验。
+- **Caching**: The plugin maintains a code mapping table. When the file is unchanged, it directly reads the cache to enhance the development experience.
 
 ---
 
-## 📋 注意事项
+## 📋 Notes
 
-- **Vue3 开发者提示**：在 Vue3 中，开发者优化可能会跳过静态节点编译，而目前插件只处理 JavaScript，因此需要强制编译。
+- **Vue3 Developer Tips**: In Vue3, optimizations may skip static node compilation. Currently, the plugin only processes JavaScript, so you need to force the compilation.
   
-- **React 支持**：React 的支持可能还不够完善，因为本人的 React 项目经验较少，遇到问题欢迎提问。
+- **React Support**: React support might not be fully mature as I have limited experience with React projects. If you encounter any issues, feel free to raise questions.
 
-- **环境判断**：Vite 插件在生产模式的判断是 `process.env.NODE_ENV === "production"`，Webpack 在生产模式的判断是 `compiler.options.mode === "production"`。需要注意当前项目中的生产模式判断是否与此一致，这将影响 `toProd` 属性的作用。
+- **Environment Detection**: The Vite plugin detects production mode with `process.env.NODE_ENV === "production"`, and the Webpack plugin does it with `compiler.options.mode === "production"`. Ensure that the production mode detection of your current project is aligned, as this will affect the `toProd` property.
 
 ---
 
-## 📚 示例
- 
-### **Vue2 Vite 示例**
+## 📚 Examples
+
+### **Vue2 Vite Example**
 
   ![](./exampleIMG/vue2Vite.gif)
 
-  当前示例配置了 hash 标识，标签的默认值便是当前代码所处文件名生产的hash
+  This example is configured with hash tags. The default value of the tag is the hash generated from the filename of the current code.
 
-### **Vue3 Vite 示例**
+### **Vue3 Vite Example**
 
   ![](./exampleIMG/vue3Vite.gif)
 
-  当前示例配置了 function 标识，自定义函数实现如下：
+  This example is configured with function tags. The custom function is implemented as follows:
   ```javascript
   tagFunction: (path, _tag, option) => {
       return [['hash', option.hashFunction(path)], ['path', path]]
   }
   ```
-  因此 路径标识和hash标识同时存在
+  Thus, both path and hash tags exist simultaneously.
 
-### **React Webpack 示例**
+### **React Webpack Example**
 
   ![](./exampleIMG/reactWebpack.gif)
 
-  当前示例配置了 hash 标识，标签的默认值便是当前代码所处文件名生产的hash
+  This example is configured with hash tags. The default value of the tag is the hash generated from the filename of the current code.
 
-### **Vue2 Webpack 示例**
+### **Vue2 Webpack Example**
 
   ![](./exampleIMG/vue2Webpack.gif)
 
-  当前示例配置了 path 标识，标签的默认值便是当前代码所处文件的具体路径
+  This example is configured with path tags. The default value of the tag is the actual path of the current file.
 
 ---
 
-欢迎使用和反馈！如果有问题或建议，欢迎提交 Issue 或 Pull Request！😊✨
+Welcome to use and provide feedback! If you have any questions or suggestions, feel free to submit an Issue or Pull Request! 😊✨
+
+Don’t forget to 🌟 Star us on GitHub!

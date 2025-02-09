@@ -221,13 +221,13 @@ export default defineConfig({
 
 ### **Vue2 Vite Example**
 
-  ![](./exampleIMG/vue2Vite.gif)
+  ![](../../exampleIMG/vue2Vite.gif)
 
   This example is configured with hash tags. The default value of the tag is the hash generated from the filename of the current code.
 
 ### **Vue3 Vite Example**
 
-  ![](./exampleIMG/vue3Vite.gif)
+  ![](../../exampleIMG/vue3Vite.gif)
 
   This example is configured with function tags. The custom function is implemented as follows:
   ```javascript
@@ -239,13 +239,13 @@ export default defineConfig({
 
 ### **React Webpack Example**
 
-  ![](./exampleIMG/reactWebpack.gif)
+  ![](../../exampleIMG/reactWebpack.gif)
 
   This example is configured with hash tags. The default value of the tag is the hash generated from the filename of the current code.
 
 ### **Vue2 Webpack Example**
 
-  ![](./exampleIMG/vue2Webpack.gif)
+  ![](../../exampleIMG/vue2Webpack.gif)
 
   This example is configured with path tags. The default value of the tag is the actual path of the current file.
 

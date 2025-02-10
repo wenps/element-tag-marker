@@ -102,6 +102,7 @@ yarn add vite-element-tag-marker-plugin --dev
 | `writeToFile`    | `false \| hash \| path`                                   | `false`                 | ❌       | Whether to write the tag value into the original file. Only supported for `hash` and `path` types. For `hash` or `path`, the plugin converts the value into the respective identifier and writes it into the original file. |
 | `tagPrefix`      | `string`                                                  | `''`                    | ❌       | Tag prefix used to differentiate tags from different projects, only effective for `hash` and `path` types.                                    |
 | `tagFunction`    | `(path: string, elementTag: Record<string, any>, option) => {tag: string, tagValue: string} \| ([tag: string, value: string][])` | `() => [['', '']]` | ❌       | The tag generation function, generating tags based on custom logic, can return an object `{tag, tagValue}` or an array of tags. The function accepts file path, element tag AST node, and the complete configuration item as parameters. |
+| `onlyShowWorkSpaceFilePath`      | `boolean`                                                  | `false`                    | ❌       | Whether to display only the specific file paths within the workspace directory.                                    |
 
 ---
 

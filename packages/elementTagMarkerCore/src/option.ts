@@ -1,7 +1,7 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-10-26 17:34:47
- * @LastEditTime: 2025-01-23 16:53:03
+ * @LastEditTime: 2025-02-10 18:25:00
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/option.ts
  * @Description: 配置文件，用于设置标记器的各项参数
  */
@@ -50,7 +50,13 @@ const DEFAULT_OPTION: BaseOption = {
     // 标签函数，用于生成标签
     tagFunction: (_path: string, _elementTag: Record<string, any>, _option: BaseOption) => {
         return [['','']]
-    }
+    },
+
+    // 是否只展示工作目录下的具体文件路径
+    onlyShowWorkSpaceFilePath: false,
+
+    // 工作空间路径
+    workSpacePath: ''
 }
 
 /** 导出当前配置实例 */
@@ -81,4 +87,6 @@ export function initOption(optionInfo?: OptionInfo): void {
     option = { ...DEFAULT_OPTION, ...generateUserOption(optionInfo || {
         option: {}
     })}
+    // 存储工作目录
+    option.workSpacePath = process.cwd()
 }

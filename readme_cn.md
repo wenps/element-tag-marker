@@ -103,6 +103,7 @@ yarn add vite-element-tag-marker-plugin --dev
 | `writeToFile`    | `false \| hash \| path`                    | `false`                  | ❌       | 是否将标签值写入原文件，仅支持 `hash` 和 `path` 类型。当为 `hash` 或 `path` 时，插件将值转化为对应标识并写入到原文件中。                        |
 | `tagPrefix`      | `string`                                   | `''`                     | ❌       | 标签前缀，用于区分不同项目中的标签，仅对 `hash` 和 `path` 两种类型生效。                                                                    |
 | `tagFunction`    | `(path: string, elementTag: Record<string, any>, option) => {tag: string, tagValue: string} \| ([tag: string, value: string][])` | `() => [['', '']]` | ❌       | 标签生成函数，结合自身逻辑生成标签，可以返回一个 `{tag, tagValue}` 的对象或标签数组。函数接收文件路径、元素标签 AST 节点和完整配置项作为参数。 |
+| `onlyShowWorkSpaceFilePath`      | `boolean`                                                  | `false`                    | ❌       | 是否只展示工作目录下的具体文件路径。                                    |
 
 ---
 

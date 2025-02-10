@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-21 14:48:57
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-01-23 17:12:19
+ * @LastEditTime: 2025-02-10 18:23:34
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/utils/keyValue.ts
  */
 import { option } from "src/option";
@@ -27,7 +27,12 @@ export function getKeyValue(params:{
         return { tag, tagValue }
       case TagType.path:
         // 使用文件路径作为标记
-        tagValue = setPrefix(path);
+        // 如果只显示工作区文件路径，则替换掉工作区路径
+        if(option.onlyShowWorkSpaceFilePath) {
+          tagValue = setPrefix(path.replace(option.workSpacePath, ''))
+        } else {
+          tagValue = setPrefix(path);
+        }
         return { tag, tagValue }
       case TagType.function:
         // 使用自定义函数生成标记

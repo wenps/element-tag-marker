@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-20 18:43:35
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-02-06 10:34:07
+ * @LastEditTime: 2025-02-10 18:22:06
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/type/index.ts
  */
 
@@ -26,4 +26,6 @@ export interface BaseOption {
     tagPrefix: string;
     projectName: string;
     tagFunction: (path: string, elementTag: object, option: BaseOption) => {tag: string, tagValue: string} | ([tag: string, value: string][]);
+    workSpacePath: string,
+    onlyShowWorkSpaceFilePath: boolean,
 }

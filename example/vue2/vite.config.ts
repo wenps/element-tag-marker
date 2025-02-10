@@ -1,7 +1,7 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-08-10 17:12:17
- * @LastEditTime: 2025-01-23 10:43:06
+ * @LastEditTime: 2025-02-10 18:31:28
  * @FilePath: /element-tag-marker/example/vue2/vite.config.ts
  */
 import path from 'path'
@@ -27,7 +27,8 @@ export default defineConfig({
         viteElementTagMarkerPlugin({
             option: {
                 writeToFile: 'hash',
-                tagType: 'hash'
+                tagType: 'path',
+                onlyShowWorkSpaceFilePath: true,
             }
         })
     ]

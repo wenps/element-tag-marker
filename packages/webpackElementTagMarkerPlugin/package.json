@@ -1,6 +1,6 @@
 {
     "name": "webpack-element-tag-marker-plugin",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "Webpack plugin for marking elements with unique tags",
     "keywords": [
         "webpack",
@@ -32,17 +32,18 @@
     },
     "homepage": "https://github.com/wenps/element-tag-marker#readme",
     "dependencies": {
-        "element-tag-marker-core": "workspace:*"
+        "element-tag-marker-core": "workspace:*",
+        "murmurhash": "^2.0.1"
     },
     "devDependencies": {
+        "@babel/core": "^7.23.2",
+        "@babel/traverse": "^7.26.4",
         "@rollup/plugin-typescript": "^11.1.5",
         "@types/babel__core": "^7.20.3",
         "@types/node": "^20.3.3",
         "@types/webpack": "^5.28.5",
         "@types/webpack-env": "^1.18.5",
         "@types/webpack-sources": "^3.2.3",
-        "@babel/core": "^7.23.2",
-        "@babel/traverse": "^7.26.4",
         "rollup": "^4.3.0",
         "rollup-plugin-dts": "^6.1.0",
         "rollup-plugin-node-externals": "^7.1.2",

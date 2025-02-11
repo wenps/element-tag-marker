@@ -28,7 +28,7 @@ export default class webpackElementTagMarkerPlugin {
     // 在 Webpack 编译前挂载 Loader
     compiler.hooks.beforeCompile.tapAsync(
       PLUGIN_NAME,
-      (_params, callback: (err?: Error) => void): void => {
+      (_params: any, callback: (err?: Error) => void): void => {
         // 检查是否已有自定义 Loader
         const hasCustomLoader = (rule: any) =>
           rule.use &&

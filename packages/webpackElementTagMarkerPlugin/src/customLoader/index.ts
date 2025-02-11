@@ -1,24 +1,19 @@
+/*
+ * @Date: 2025-02-11 14:41:06
+ * @LastEditors: xiaoshan
+ * @LastEditTime: 2025-02-11 19:19:50
+ * @FilePath: /element-tag-marker/packages/webpackElementTagMarkerPlugin/src/customLoader/index.ts
+ */
 // /element-tag-marker/packages/webpackElementTagMarkerPlugin/src/customLoader/index.ts
 import { LoaderContext } from "webpack";
 import * as babel from "@babel/core";
 import { filter, writeTagToFile, checkPath, fileCache } from "element-tag-marker-core";
 import fs from "fs";
-import murmur from "murmurhash"; // 使用 Murmurhash 算法替代 MD5
 
 // 定义 Loader 的配置选项类型
 type LoaderOptions = {
   [key: string]: any;
 };
-
-/**
- * 生成部分内容的哈希值，帮助快速判断文件内容是否改变
- * @param content 文件内容
- * @returns 文件内容前 1000 个字符的哈希值
- */
-function generatePartialHash(content: string): string {
-  const partialContent = content.slice(0, 1000); // 取文件的前 1000 字节
-  return murmur.v3(partialContent).toString();
-}
 
 /**
  * 根据文件信息生成缓存键

@@ -31,7 +31,7 @@ module.exports = function (source: string): string {
   // 获取loader上下文
   const context = this as unknown as LoaderContext<LoaderOptions>
   const filePath = context.resourcePath;
-  const cache = context.getOptions()?.cache as Map<string, any>; // 通过 options 获取插件的共享缓存
+  const cache = context?.getOptions()?.cache as Map<string, any>; // 通过 options 获取插件的共享缓存
 
   if (!cache) {
     throw new Error('文件缓存不存在?');

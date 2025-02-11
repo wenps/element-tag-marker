@@ -31,6 +31,8 @@ module.exports = function (source: string): string {
   // 获取loader上下文
   const context = this as unknown as LoaderContext<LoaderOptions>
   const filePath = context.resourcePath;
+  console.log(context);
+  
   const cache = context?.getOptions()?.cache as Map<string, any>; // 通过 options 获取插件的共享缓存
 
   if (!cache) {

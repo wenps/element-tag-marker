@@ -2,7 +2,7 @@
  * @FilePath: /element-tag-marker/packages/webpackElementTagMarkerPlugin/src/index.ts
  */
 import webpack from "webpack";
-import { OptionInfo, initOption, option } from "element-tag-marker-core";
+import { OptionInfo, initOption, option, fileCache } from "element-tag-marker-core";
 import path from "path";
 import { Compilation } from "webpack";
 
@@ -12,7 +12,6 @@ const PLUGIN_NAME = "webpackElementTagMarkerPlugin";
  * Webpack 插件类，用于自动处理标记
  */
 export default class webpackElementTagMarkerPlugin {
-  private fileCache: Map<string, any> = new Map();
 
   /**
    * 构造函数
@@ -30,7 +29,7 @@ export default class webpackElementTagMarkerPlugin {
    */
   apply(compiler: webpack.Compiler) {
     // 清空缓存，每次启动 Webpack 都会重置 Map 表
-    this.fileCache.clear();
+    fileCache.clear();
 
     // 判断当前是否为生产环境，如果是生产环境，且不在生产环境产生功能时，不处理标记
     if (compiler.options.mode === "production" && !option.toProd) {
@@ -62,9 +61,6 @@ export default class webpackElementTagMarkerPlugin {
               {
                 // 基于loader批量收集目标翻译内容
                 loader: path.resolve(__dirname, "./customLoader/index.cjs"),
-                options: {
-                  cache: this.fileCache, // 传递缓存对象给 Loader 使用
-                },
               },
             ],
           });
@@ -78,11 +74,11 @@ export default class webpackElementTagMarkerPlugin {
       console.log("⚙️ 构建完成，开始处理 fileCache 缓存...");
 
       // 遍历缓存，按规则处理（index = 1 -> index = 0, index = 0 -> 删除）
-      Array.from(this.fileCache.entries()).forEach(([key, value]) => {
+      Array.from(fileCache.entries()).forEach(([key, value]) => {
         if (value.index === 1) {
           value.index = 0; // 如果 index 为 1，则重置为 0
         } else if (value.index === 0) {
-          this.fileCache.delete(key); // 如果 index 为 0，则删除缓存
+          fileCache.delete(key); // 如果 index 为 0，则删除缓存
           console.log(`🗑️ 缓存删除: ${key}`);
         }
       });

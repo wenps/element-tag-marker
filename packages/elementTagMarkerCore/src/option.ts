@@ -1,7 +1,7 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-10-26 17:34:47
- * @LastEditTime: 2025-02-10 18:25:00
+ * @LastEditTime: 2025-02-11 11:49:44
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/option.ts
  * @Description: 配置文件，用于设置标记器的各项参数
  */
@@ -9,6 +9,9 @@
 import lodash from 'lodash'
 import { hashTag } from './utils'
 import { BaseOption, TagType } from './type'
+
+// 文件缓存
+export const fileCache: Map<string, any> = new Map();
 
 const DEFAULT_OPTION: BaseOption = {
     // 标记类型

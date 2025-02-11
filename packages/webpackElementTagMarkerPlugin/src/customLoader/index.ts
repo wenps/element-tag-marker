@@ -1,64 +1,67 @@
 /*
- * @Date: 2025-02-11 14:41:06
- * @LastEditors: xiaoshan
- * @LastEditTime: 2025-02-11 19:19:50
  * @FilePath: /element-tag-marker/packages/webpackElementTagMarkerPlugin/src/customLoader/index.ts
  */
-// /element-tag-marker/packages/webpackElementTagMarkerPlugin/src/customLoader/index.ts
-import { LoaderContext } from "webpack";
-import * as babel from "@babel/core";
-import { filter, writeTagToFile, checkPath, fileCache } from "element-tag-marker-core";
-import fs from "fs";
-
-// 定义 Loader 的配置选项类型
-type LoaderOptions = {
-  [key: string]: any;
-};
+import { LoaderContext } from 'webpack';
+import * as babel from '@babel/core';
+import { filter, writeTagToFile, checkPath, fileCache } from 'element-tag-marker-core';
+import crypto from 'crypto';
 
 /**
- * 根据文件信息生成缓存键
- * @param filePath 文件路径
- * @returns 缓存键，由路径 + 修改时间 + 文件大小组成
+ * Webpack loader的配置选项类型
  */
-function generateFileKey(filePath: string): string {
-  const stats = fs.statSync(filePath); // 读取文件元数据
-  return `${filePath}-${stats.mtimeMs}-${stats.size}`;
+type LoaderOptions = {
+    [key: string]: any
 }
 
 /**
- * Webpack 的加载器主函数
- * @param source 文件的源代码
- * @returns 转换后的代码
+ * 生成文件内容的哈希值
+ * @param content 文件内容
+ * @returns 哈希值
+ */
+function generateHash(content: string): string {
+  return crypto.createHash('md5').update(content).digest('hex');
+}
+
+/**
+ * Webpack Loader 函数，用于处理源代码中的元素标记
+ * @param {string} source 源代码内容
+ * @returns {string} 处理后的代码
  */
 module.exports = function (source: string): string {
-  const context = this as unknown as LoaderContext<LoaderOptions>; // 获取当前的 Loader 上下文
-  const filePath = context.resourcePath; // 获取当前文件路径
+  // 获取loader上下文
+  const context = this as unknown as LoaderContext<LoaderOptions>
+  const filePath = context.resourcePath;
+  
+  const cache = fileCache as Map<string, any>; // 通过 options 获取插件的共享缓存
 
-  // 启用 Webpack 缓存
+  if (!cache) {
+    throw new Error('文件缓存不存在?');
+  }
+
+  // 启用缓存
   context.cacheable && context.cacheable(true);
 
-  // 检查文件路径是否符合配置规则
+  // 检查文件路径是否符合配置要求
   if (!checkPath(filePath)) {
-    return source; // 如果不符合规则，直接返回源代码
+    return source; // 如果不符合处理规则，直接返回源代码
   }
 
-  // 使用文件路径和元数据生成缓存键
-  const cacheKey = generateFileKey(filePath);
-
-  // 检查内存缓存是否命中
-  const cached = fileCache.get(cacheKey);
-  if (cached) {
-    cached.used = 0; // 如果命中缓存，重置使用计数
-    return cached.result;
+  // 生成当前文件内容的哈希值
+  const contentHash = generateHash(source);
+  
+  // 检查缓存，如果内容没有发生变化则直接返回缓存中的处理结果
+  if (cache.get(filePath + contentHash)) {
+    
+    // 命中缓存标识
+    cache.get(filePath + contentHash).index = 1
+    return cache.get(filePath + contentHash).result;
   }
 
-  // console.log("⚙️ 未命中缓存，开始处理文件:", filePath);
-
-  // 将标记信息写入文件
+  // 将元素标记信息写入文件
   writeTagToFile(filePath);
 
   try {
-    // 使用 Babel 插件处理代码
+    // 使用 Babel 转换代码，应用自定义的标记过滤器插件
     const result = babel.transformSync(source, {
       configFile: false,
       plugins: [filter.default(filePath)],
@@ -66,15 +69,16 @@ module.exports = function (source: string): string {
 
     const transformedCode = result?.code || source;
 
-    // 将处理结果存入缓存
-    fileCache.set(cacheKey, {
-      result: transformedCode, // 转换后的代码
-      used: 0, // 初始化缓存使用计数
-    });
+    // 将结果存入缓存
+    cache.set(filePath + contentHash, {
+      result: transformedCode,
+      index: 1
+    })
 
     return transformedCode;
   } catch (error) {
-    console.error("❌ 文件处理错误:", filePath, error);
-    return source; // 如果出错，返回原始代码
+    console.error('文件处理异常: ', filePath);
+    console.error(error);
+    return source;
   }
 };

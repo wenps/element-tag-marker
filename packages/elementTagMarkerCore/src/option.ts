@@ -1,12 +1,12 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-10-26 17:34:47
- * @LastEditTime: 2025-02-14 14:25:44
+ * @LastEditTime: 2025-02-14 14:44:40
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/option.ts
  * @Description: 配置文件，用于设置标记器的各项参数
  */
 
-import lodash from "lodash-es";
+import { cloneDeep } from "lodash-es";
 import { hashTag } from "./utils";
 import { BaseOption, TagType } from "./type";
 
@@ -83,7 +83,7 @@ export type OptionInfo = {
  * @returns {Partial<OptionType>} 处理后的用户配置
  */
 function generateUserOption(optionInfo: OptionInfo): Partial<BaseOption> {
-  return lodash.cloneDeep(optionInfo.option);
+  return cloneDeep(optionInfo.option);
 }
 
 /**

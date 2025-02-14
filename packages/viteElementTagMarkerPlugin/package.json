@@ -1,6 +1,6 @@
 {
     "name": "vite-element-tag-marker-plugin",
-    "version": "1.0.11",
+    "version": "1.0.12",
     "description": "A Vite plugin for marking elements with unique tags",
     "keywords": [
         "vite",
@@ -33,7 +33,9 @@
     },
     "homepage": "https://github.com/wenps/element-tag-marker#readme",
     "dependencies": {
-        "element-tag-marker-core": "workspace:*"
+        "@rollup/plugin-babel": "^6.0.4",
+        "element-tag-marker-core": "workspace:*",
+        "rollup-plugin-terser": "^7.0.2"
     },
     "devDependencies": {
         "@babel/core": "^7.23.2",

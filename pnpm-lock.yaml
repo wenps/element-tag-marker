@@ -399,9 +399,18 @@ importers:
       '@babel/traverse':
         specifier: ^7.26.4
         version: 7.26.5
-      lodash:
+      '@rollup/plugin-babel':
+        specifier: ^6.0.4
+        version: 6.0.4(@babel/core@7.26.0)(@types/babel__core@7.20.5)(rollup@4.20.0)
+      '@types/lodash-es':
+        specifier: ^4.17.12
+        version: 4.17.12
+      lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
+      rollup-plugin-terser:
+        specifier: ^7.0.2
+        version: 7.0.2(rollup@4.20.0)
     devDependencies:
       '@babel/types':
         specifier: ^7.23.0
@@ -442,9 +451,15 @@ importers:
 
   packages/viteElementTagMarkerPlugin:
     dependencies:
+      '@rollup/plugin-babel':
+        specifier: ^6.0.4
+        version: 6.0.4(@babel/core@7.26.0)(@types/babel__core@7.20.5)(rollup@4.20.0)
       element-tag-marker-core:
         specifier: workspace:*
         version: link:../elementTagMarkerCore
+      rollup-plugin-terser:
+        specifier: ^7.0.2
+        version: 7.0.2(rollup@4.20.0)
     devDependencies:
       '@babel/core':
         specifier: ^7.23.2
@@ -1793,6 +1808,19 @@ packages:
       rollup:
         optional: true
 
+  '@rollup/plugin-babel@6.0.4':
+    resolution: {integrity: sha512-YF7Y52kFdFT/xVSuVdjkV5ZdX/3YtmX0QulG+x0taQOtJdHYzVU61aSSkAgVJ7NOv6qPkIYiJSgSWWN/DM5sGw==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0
+      '@types/babel__core': ^7.1.9
+      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      '@types/babel__core':
+        optional: true
+      rollup:
+        optional: true
+
   '@rollup/plugin-commonjs@15.1.0':
     resolution: {integrity: sha512-xCQqz4z/o0h2syQ7d9LskIMvBSH4PX5PjYdpSSvgS+pQik3WahkQVNWg3D8XJeYjZoVWnIUQYDghuEMRGrmQYQ==}
     engines: {node: '>= 8.0.0'}
@@ -1994,6 +2022,9 @@ packages:
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
+
+  '@types/lodash-es@4.17.12':
+    resolution: {integrity: sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==}
 
   '@types/lodash@4.17.7':
     resolution: {integrity: sha512-8wTvZawATi/lsmNu10/j2hk1KEP0IvjubqPE3cu1Xz7xfXXt5oCq3SNUz4fMIP4XGF9Ky+Ue2tBA3hcS7LSBlA==}
@@ -9589,6 +9620,17 @@ snapshots:
     optionalDependencies:
       rollup: 4.20.0
 
+  '@rollup/plugin-babel@6.0.4(@babel/core@7.26.0)(@types/babel__core@7.20.5)(rollup@4.20.0)':
+    dependencies:
+      '@babel/core': 7.26.0
+      '@babel/helper-module-imports': 7.25.9
+      '@rollup/pluginutils': 5.1.0(rollup@4.20.0)
+    optionalDependencies:
+      '@types/babel__core': 7.20.5
+      rollup: 4.20.0
+    transitivePeerDependencies:
+      - supports-color
+
   '@rollup/plugin-commonjs@15.1.0(rollup@2.77.3)':
     dependencies:
       '@rollup/pluginutils': 3.1.0(rollup@2.77.3)
@@ -9796,6 +9838,10 @@ snapshots:
       '@types/node': 20.14.15
 
   '@types/json-schema@7.0.15': {}
+
+  '@types/lodash-es@4.17.12':
+    dependencies:
+      '@types/lodash': 4.17.7
 
   '@types/lodash@4.17.7': {}
 
@@ -15124,6 +15170,14 @@ snapshots:
       '@babel/code-frame': 7.26.2
       jest-worker: 26.6.2
       rollup: 2.77.3
+      serialize-javascript: 4.0.0
+      terser: 5.37.0
+
+  rollup-plugin-terser@7.0.2(rollup@4.20.0):
+    dependencies:
+      '@babel/code-frame': 7.26.2
+      jest-worker: 26.6.2
+      rollup: 4.20.0
       serialize-javascript: 4.0.0
       terser: 5.37.0
 

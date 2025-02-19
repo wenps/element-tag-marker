@@ -4,7 +4,6 @@
 import webpack from "webpack";
 import { OptionInfo, initOption, option, fileCache } from "element-tag-marker-core";
 import path from "path";
-import { Compilation } from "webpack";
 
 const PLUGIN_NAME = "webpackElementTagMarkerPlugin";
 
@@ -13,11 +12,14 @@ const PLUGIN_NAME = "webpackElementTagMarkerPlugin";
  */
 export default class webpackElementTagMarkerPlugin {
 
+  private test: RegExp;
+
   /**
    * 构造函数
    * @param optionInfo 插件配置选项
    */
   constructor(optionInfo: OptionInfo) {
+    this.test = generateAdvancedRegex(allowedExtensions);
     // 初始化插件配置，如果没有传入配置则使用默认配置
     if (optionInfo) initOption(optionInfo);
     else initOption();
@@ -37,9 +39,9 @@ export default class webpackElementTagMarkerPlugin {
     }
 
     // 添加 Loader 时共享缓存
-    compiler.hooks.beforeCompile.tapAsync(
+    compiler.hooks.emit.tap(
       PLUGIN_NAME,
-      (_params: Compilation["params"], callback: (err?: Error) => void) => {
+      () => {
         // 检查是否已添加 Loader
         const hasCustomLoader = (rule: any) =>
           rule.use &&
@@ -55,7 +57,7 @@ export default class webpackElementTagMarkerPlugin {
         ) {
           compiler.options.module.rules.push({
             // loader 只能处理js 因此这里需要作为后置loader进行插入
-            test: generateAdvancedRegex(allowedExtensions),
+            test: this.test,
             enforce: "post", // 后置 Loader，确保在其他 Loader 之后执行
             use: [
               {
@@ -65,7 +67,6 @@ export default class webpackElementTagMarkerPlugin {
             ],
           });
         }
-        callback();
       }
     );
 

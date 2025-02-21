@@ -1,12 +1,12 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-10-26 17:34:47
- * @LastEditTime: 2025-02-14 14:44:40
+ * @LastEditTime: 2025-02-21 10:43:16
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/option.ts
  * @Description: 配置文件，用于设置标记器的各项参数
  */
 
-import { cloneDeep } from "lodash-es";
+import { cloneDeep } from "./utils";
 import { hashTag } from "./utils";
 import { BaseOption, TagType } from "./type";
 

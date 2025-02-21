@@ -1,12 +1,13 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-10-12 18:18:51
- * @LastEditTime: 2025-01-24 11:00:06
+ * @LastEditTime: 2025-02-21 11:03:17
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/filter/visitor/CallExpression/index.ts
  */
 import handleJsxDEV from "./core/jsxDEV";
 import handle_c from "./core/_c";
 import handle_createElementVNode from "./core/_createElementVNode";
+import handle_render from "./core/render";
 
 /**
  * 处理CallExpression节点,为React和Vue2/3组件添加标记属性
@@ -15,6 +16,13 @@ import handle_createElementVNode from "./core/_createElementVNode";
  */
 export default function (path: any, filePath: string) {
   let { node } = path;
+
+  // 处理vue3的render函数
+  if (node.id && node.id.name === "render") {
+    console.log("render");
+    
+    handle_render(node, filePath);
+  }
 
   // 处理react
   if (node.callee && node.callee.name === "jsxDEV") {

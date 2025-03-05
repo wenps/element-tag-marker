@@ -9,7 +9,17 @@
  */
 export type Transform =
   | ((source: string, filePath: string) => string)
-  | null;
+  | null | undefined;
+/**
+ * 转换函数类型定义
+ * 定义了一个转换函数类型，该函数接受源文件内容、文件路径和基础配置选项作为参数，并返回处理后的源文件内容。
+ * 该类型可以是一个函数，也可以为 null。
+ *
+ * @param source - 源文件内容
+ * @param filePath - 文件路径;
+ */
+
+export type initMethod = string | undefined
 
 /** 标记类型 */
 /**
@@ -106,9 +116,7 @@ export interface BaseOption {
    * @param option - 基础配置选项
    * @returns 处理后的源文件内容
    */
-  beforeTransform:
-    | Transform
-    | null;
+  beforeTransform: Transform
   /**
    * 转换后处理函数，可对转换后的文件内容进行后处理
    * @param source - 转换后的文件内容
@@ -116,9 +124,12 @@ export interface BaseOption {
    * @param option - 基础配置选项
    * @returns 处理后的文件内容
    */
-  afterTransform:
-    | Transform
-    | null;
+  afterTransform: Transform
+  
+  /**
+   * 初始化方法，指定初始化时执行的操作，可为字符串或未定义
+   */
+  initMethod: initMethod;
 }
 
 /** 工具箱类型 */

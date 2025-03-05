@@ -82,7 +82,7 @@ module.exports = function (source: string): string {
     // 如果存在afterTransform函数，则调用它进行后处理
     if (typeof option.afterTransform === "function") {
       transformedCode = option.afterTransform(result?.code || source, filePath);
-    }
+    }   
 
     transformedCode = result?.code || source; // 获取转换后的代码
 

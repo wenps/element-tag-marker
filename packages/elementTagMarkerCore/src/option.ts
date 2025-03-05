@@ -1,7 +1,7 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-10-26 17:34:47
- * @LastEditTime: 2025-02-21 10:43:16
+ * @LastEditTime: 2025-02-28 10:55:29
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/option.ts
  * @Description: 配置文件，用于设置标记器的各项参数
  */
@@ -64,6 +64,12 @@ const DEFAULT_OPTION: BaseOption = {
 
   // 工作空间路径
   workSpacePath: "",
+
+  // 在转换之前执行的函数
+  beforeTransform: null,
+
+  // 在转换之后执行的函数
+  afterTransform: null
 };
 
 /** 导出当前配置实例 */

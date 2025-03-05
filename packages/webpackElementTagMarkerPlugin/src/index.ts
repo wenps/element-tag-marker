@@ -2,8 +2,16 @@
  * @FilePath: /element-tag-marker/packages/webpackElementTagMarkerPlugin/src/index.ts
  */
 import webpack from "webpack";
-import { OptionInfo, initOption, option, fileCache } from "element-tag-marker-core";
+import {
+  OptionInfo,
+  initOption,
+  option,
+  fileCache,
+} from "element-tag-marker-core";
 import path from "path";
+
+// 导出标记插件
+export { markerPlugin } from "element-tag-marker-core";
 
 const PLUGIN_NAME = "webpackElementTagMarkerPlugin";
 
@@ -11,7 +19,6 @@ const PLUGIN_NAME = "webpackElementTagMarkerPlugin";
  * Webpack 插件类，用于自动处理标记
  */
 export default class webpackElementTagMarkerPlugin {
-
   private test: RegExp;
 
   /**
@@ -38,37 +45,33 @@ export default class webpackElementTagMarkerPlugin {
       return;
     }
 
+    // 检查是否已添加 Loader
+    const hasCustomLoader = (rule: any) =>
+      rule.use &&
+      Array.isArray(rule.use) &&
+      rule.use.some(({ loader }: { loader: string }) => {
+        loader && loader.includes("customLoader/index.cjs");
+      });
     // 添加 Loader 时共享缓存
-    compiler.hooks.emit.tap(
-      PLUGIN_NAME,
-      () => {
-        // 检查是否已添加 Loader
-        const hasCustomLoader = (rule: any) =>
-          rule.use &&
-          Array.isArray(rule.use) &&
-          rule.use.some(({ loader }: { loader: string }) => {
-            loader && loader.includes("customLoader/index.cjs");
-          });
-
-        // 添加自定义 Loader 到 Webpack 配置
-        if (
-          compiler.options.module.rules &&
-          !compiler.options.module.rules.some(hasCustomLoader)
-        ) {
-          compiler.options.module.rules.push({
-            // loader 只能处理js 因此这里需要作为后置loader进行插入
-            test: this.test,
-            enforce: "post", // 后置 Loader，确保在其他 Loader 之后执行
-            use: [
-              {
-                // 基于loader批量收集目标翻译内容
-                loader: path.resolve(__dirname, "./customLoader/index.cjs"),
-              },
-            ],
-          });
-        }
+    compiler.hooks.environment.tap(PLUGIN_NAME, () => {
+      // 添加自定义 Loader 到 Webpack 配置
+      if (
+        compiler.options.module.rules &&
+        !compiler.options.module.rules.some(hasCustomLoader)
+      ) {
+        compiler.options.module.rules.push({
+          // loader 只能处理js 因此这里需要作为后置loader进行插入
+          test: this.test,
+          enforce: "post", // 后置 Loader，确保在其他 Loader 之后执行
+          use: [
+            {
+              // 基于loader批量收集目标翻译内容
+              loader: path.resolve(__dirname, "./customLoader/index.cjs"),
+            },
+          ],
+        });
       }
-    );
+    });
 
     // 构建完成后，清理缓存或更新 index
     compiler.hooks.done.tap(PLUGIN_NAME, () => {

@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-28 14:28:36
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-05 18:12:22
+ * @LastEditTime: 2025-03-06 11:04:33
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/markerPlugin/generateSingleVue2EleIdByPathPlugin/index.ts
  */
 
@@ -24,7 +24,6 @@ export default class GenerateSingleVue2EleIdByPathPlugin extends originClass {
         super(optionPlugin);
         /**
          * 转换函数，使用传入的 `change` 函数对源字符串进行处理。
-         * 
          * @param Source - 要处理的源字符串。
          * @param filePath - 文件的路径。
          * @returns 转换后的字符串。
@@ -33,5 +32,14 @@ export default class GenerateSingleVue2EleIdByPathPlugin extends originClass {
             // 调用 change 函数进行转换，this.option 来自于 originClass 的实例化
             return change(Source, filePath, this.option);
         }
+        this.initMethod = `
+        // 生成父标签路径的函数
+        window.generateParentTagPath = function (data) {
+            if (data) {
+                console.log(data);
+                return data.tag;
+            }
+        }
+        `
     }
 }

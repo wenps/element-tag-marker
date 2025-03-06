@@ -37,7 +37,6 @@ export default class webpackElementTagMarkerPlugin {
    *                   如果传入该参数，则使用该配置初始化插件；若未传入，则使用默认配置
    */
   constructor(optionInfo: OptionInfo) {
-    console.log(optionInfo);
     
     
     // 生成动态正则表达式，用于匹配允许处理的文件

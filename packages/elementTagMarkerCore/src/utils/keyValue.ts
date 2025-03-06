@@ -1,14 +1,14 @@
 /*
  * @Date: 2025-01-21 14:48:57
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-02-10 18:23:34
+ * @LastEditTime: 2025-03-06 17:11:28
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/utils/keyValue.ts
  */
 import { option } from "src/option";
 import { TagType } from "src/type";
 
 /**
- * 获取挂载的标签和标签值
+ * 获取挂载的标签和标签值，对应的生成函数elementTag 比如_c('el-button', {})
  * @param params 
  * @returns 
  */
@@ -23,6 +23,7 @@ export function getKeyValue(params:{
     switch(option.tagType) {
       case TagType.hash:
         // 使用哈希函数生成标记
+        // todo: 为了实现 路径的唯一性，需要加上节点的相对位置，因此这个功能的实现需要拿到顶层路径，遍历符合的节点，给他加位置信息
         tagValue = setPrefix(option.hashFunction(path)) ;
         return { tag, tagValue }
       case TagType.path:

@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-28 14:28:36
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-06 16:05:05
+ * @LastEditTime: 2025-03-06 18:12:49
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/markerPlugin/generateSingleVue2EleIdByPathPlugin/index.ts
  */
 
@@ -9,6 +9,7 @@ import { OptionPlugin } from './../pluginClass';
 import originClass from '../pluginClass';
 import beforeTransform from './beforeTransform';
 import initMethod from './initMethod';
+import setAttrTransform from './setAttrTransform';
 
 /**
  * 一个用于根据路径生成单个Vue 2元素ID的工具类。
@@ -23,13 +24,8 @@ export default class GenerateSingleVue2EleIdByPathPlugin extends originClass {
     constructor(optionPlugin: OptionPlugin) {
         // 调用父类的构造函数，传入转换函数
         super(optionPlugin);
-        this.beforeTransform = (Source: string, filePath: string) => {
-            // 调用 change 函数进行转换，this.option 来自于 originClass 的实例化
-            return beforeTransform(Source, filePath, this.option);
-        }
-        this.initMethod = (Source: string, filePath: any) => {
-            // 调用 change 函数进行转换，this.option 来自于 originClass 的实例化
-            return initMethod(Source, filePath, this.option);
-        }
+        this.beforeTransform = (source: string, filePath: string) => beforeTransform(source, filePath, this.option);
+        this.initMethod = (source: string, filePath: any) => initMethod(source, filePath, this.option);
+        this.setAttrTransform = (val: string) => setAttrTransform(val, this.option);
     }
 }

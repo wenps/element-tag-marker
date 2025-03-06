@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-06 16:17:56
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-06 13:54:46
+ * @LastEditTime: 2025-03-06 18:24:59
  * @FilePath: /element-tag-marker/example/webpack-vue2/webpack.config.js
  */
 const path = require("path");
@@ -50,6 +50,7 @@ module.exports = {
         tagType: "path",
         initMethod: GenerateSingleVue2EleIdByPathPlugin.initMethod,
         beforeTransform: GenerateSingleVue2EleIdByPathPlugin.beforeTransform,
+        setAttrTransform: GenerateSingleVue2EleIdByPathPlugin.setAttrTransform,
       },
     }),
   ],

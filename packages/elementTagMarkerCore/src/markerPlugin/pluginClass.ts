@@ -1,60 +1,70 @@
-
 /*
  * @Date: 2025-03-04 16:36:11
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-05 18:32:06
+ * @LastEditTime: 2025-03-06 18:16:00
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/markerPlugin/pluginClass.ts
  */
-import { BaseOption } from '../type/index';
-import { Transform, initMethod } from 'src/type';
+// 导入类型定义
+import { Transform, initMethod, AttrTransform, BaseOption } from 'src/type';
+// 导入配置选项
 import { option } from '../option';
 
+/**
+ * 定义插件选项类型
+ */
 export type OptionPlugin = {
+    // 转换前的处理函数
     beforeTransform?: Transform,
+    // 转换后的处理函数
     afterTransform?: Transform,
-    initMethod?: initMethod
+    // 初始化方法
+    initMethod?: initMethod,
+    // 属性转换函数
+    setAttrTransform?: AttrTransform
 }
 
 /**
- * PluginClass 类用于初始化和管理配置选项与转换方法。
- * 该类接收一个 Transform 类型的参数，用于初始化内部的转换方法。
- * 配置选项从 '../option' 模块中导入并存储在类的私有属性中。
+ * PluginClass 类用于初始化和管理配置选项与转换方法
  */
 export default class PluginClass {
-    /**
-     * 存储 BaseOption 类型的配置选项。
-     */
+    // 基础配置选项
     public option: BaseOption;
-    /**
-     * 存储 Transform 类型的转换方法，option 可以从当前实例获取
-     */
-    public beforeTransform: Transform | undefined;
-
-    /**
-     * 存储 Transform 类型的转换方法，option 可以从当前实例获取
-     */
-    public afterTransform: Transform
-
-
-    /**
-     * 初始化方法，在入口文件中运行。
-     */
+    // 转换前的处理函数
+    public beforeTransform: Transform;
+    // 转换后的处理函数
+    public afterTransform: Transform;
+    // 初始化方法
     public initMethod: initMethod;
+    // 属性转换函数
+    public setAttrTransform: AttrTransform;
 
     /**
-     * 构造函数，初始化 PluginClass 实例。
-     * @param transform - 一个 Transform 类型的对象，用于进行数据转换。
+     * 构造函数，初始化插件类
+     * @param optionPlugin - 插件选项，包含转换方法和初始化方法
      */
     constructor(optionPlugin: OptionPlugin = {
-        beforeTransform: null ,
-        afterTransform: null
+        beforeTransform: null,
+        afterTransform: null,
+        initMethod: undefined,
+        setAttrTransform: undefined
     }) {
-        const {beforeTransform, afterTransform, initMethod = undefined} = optionPlugin;
-        // 合并配置
+        // 解构赋值获取插件选项
+        const {
+            beforeTransform,
+            afterTransform,
+            initMethod = null,
+            setAttrTransform = null
+        } = optionPlugin;
+
+        // 赋值转换前的处理函数
         this.beforeTransform = beforeTransform;
+        // 赋值转换后的处理函数
         this.afterTransform = afterTransform;
+        // 赋值初始化方法
         this.initMethod = initMethod;
-        // 缓存全局配置
+        // 赋值属性转换函数
+        this.setAttrTransform = setAttrTransform;
+        // 赋值基础配置选项
         this.option = option;
     }
 }

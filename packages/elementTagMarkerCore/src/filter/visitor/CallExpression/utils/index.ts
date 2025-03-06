@@ -1,11 +1,12 @@
 /*
  * @Date: 2025-01-22 19:23:56
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-02-07 21:17:26
+ * @LastEditTime: 2025-03-06 18:12:00
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/filter/visitor/CallExpression/utils/index.ts
  */
 
 import * as t from "@babel/types";
+import { option } from "src/option";
 /**
  * 向props对象添加标记属性
  * @param {string} tag - 标记属性名
@@ -21,13 +22,13 @@ export const setAttr = (tag: string, value: string, propsArg: t.ObjectExpression
   if (targetNode) {
     // 如果当前tag存在当前对象中，那就直接改
     if (t.isObjectProperty(targetNode)) {
-      targetNode.value = t.stringLiteral(value);
+      targetNode.value = option.setAttrTransform ? option.setAttrTransform(value) : t.stringLiteral(value);
     }
   } else {
     // 如果不存在就加进去
     const tagProperty = t.objectProperty(
       t.identifier(tag),
-      t.stringLiteral(value)
+      option.setAttrTransform ? option.setAttrTransform(value) : t.stringLiteral(value)
     );
     propsArg.properties.push(tagProperty);
   }

@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-28 14:28:09
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-06 16:09:14
+ * @LastEditTime: 2025-03-06 18:31:13
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/markerPlugin/generateSingleVue2EleIdByPathPlugin/initMethod.ts
  */
 import { BaseOption } from "../../type";
@@ -21,7 +21,7 @@ export default function initMethod(
   // 若 jsString 为空则直接返回
   if (!jsString) return jsString;
 
-  const codeToAdd = `window.generateParentTagPath = (val) => { return val?.tag || (console.log("父组件tag不存在"), ""); };`;
+  const codeToAdd = `window.generateParentTagPath = (val) => { return val?.$attrs?.tag || (console.log("父组件tag不存在", val), ""); };`;
 
   // 若 jsString 已包含 codeToAdd 则直接返回，否则添加到开头
   return jsString.includes(codeToAdd) ? jsString : `${codeToAdd}\n${jsString}`;

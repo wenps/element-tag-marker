@@ -1,14 +1,11 @@
 /*
  * @Date: 2025-02-06 16:18:46
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-06 16:10:11
+ * @LastEditTime: 2025-03-06 16:40:15
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/type/index.ts
  */
 /**
  * 转换函数类型定义，可接受源文件内容、文件路径，返回处理后内容，也可为 null 或 undefined
- * @param source - 源文件内容
- * @param filePath - 文件路径
- * @returns 处理后的源文件内容
  */
 export type Transform =
   | ((source: string, filePath: string) => string)
@@ -16,10 +13,12 @@ export type Transform =
   | undefined;
 
 /**
+ * 转换函数类型定义，可接受源文件内容、文件路径，返回处理后内容，也可为 null 或 undefined
+ */
+export type  AttrTransform = | ((val: string) => any) | null | undefined;
+
+/**
  * 初始化方法类型定义，可接受源文件内容、文件路径，返回处理后内容，也可为 null 或 undefined
- * @param source - 源文件内容
- * @param filePath - 文件路径
- * @returns 处理后的源文件内容
  */
 export type initMethod =
   | ((source: string, filePath: any) => string)
@@ -82,6 +81,8 @@ export interface BaseOption {
   afterTransform: Transform;
   // 初始化方法
   initMethod: initMethod;
+  // 设置属性转换函数
+  setAttrTransform: AttrTransform;
 }
 
 /**

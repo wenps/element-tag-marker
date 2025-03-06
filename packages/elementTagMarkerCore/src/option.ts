@@ -1,7 +1,7 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-10-26 17:34:47
- * @LastEditTime: 2025-03-05 18:31:40
+ * @LastEditTime: 2025-03-06 16:35:00
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/option.ts
  * @Description: 配置文件，用于设置标记器的各项参数
  */
@@ -73,6 +73,9 @@ const DEFAULT_OPTION: BaseOption = {
 
   // 初始化方法，注册在所有代码运行前的方法
   initMethod: undefined,
+
+  // 设置属性转换函数
+  setAttrTransform: null,
 };
 
 /** 导出当前配置实例 */

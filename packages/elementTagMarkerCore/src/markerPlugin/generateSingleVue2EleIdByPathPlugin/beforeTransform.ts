@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-28 14:28:09
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-06 10:07:13
+ * @LastEditTime: 2025-03-06 15:31:47
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/markerPlugin/generateSingleVue2EleIdByPathPlugin/transform.ts
  */
 import * as t from "@babel/types";
@@ -102,7 +102,7 @@ const generateParentTagPath = function (filePath: string, option: BaseOption) {
  * @param {BaseOption} option - 基础配置
  * @returns {string} 转换后的 JavaScript 字符串
  */
-export default function change(
+export default function beforeTransform(
   jsString: string,
   filePath: string,
   option: BaseOption

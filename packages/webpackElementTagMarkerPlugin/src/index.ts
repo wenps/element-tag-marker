@@ -109,6 +109,9 @@ export default class webpackElementTagMarkerPlugin {
                 {
                   // 基于 loader 处理入口文件
                   loader: path.resolve(__dirname, "./initLoader/index.cjs"),
+                  options: {
+                    entryFiles: entryFiles
+                  }
                 },
               ],
             });

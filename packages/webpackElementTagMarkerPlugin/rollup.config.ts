@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-23 14:28:42
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-02-07 18:08:16
+ * @LastEditTime: 2025-03-06 15:01:06
  * @FilePath: /element-tag-marker/packages/webpackElementTagMarkerPlugin/rollup.config.ts
  */
 import { defineConfig } from 'rollup'
@@ -10,86 +10,76 @@ import path from 'node:path'
 import { fileURLToPath } from 'url'
 import dts from 'rollup-plugin-dts'
 
-function resolve(filePath: string) {
-    const __dirname = path.dirname(fileURLToPath(import.meta.url))
-    return path.resolve(__dirname, filePath)
+// 基础路径解析
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const resolve = (...paths: string[]) => path.resolve(__dirname, ...paths)
+
+// 公共配置项
+const BASE_TS_CONFIG = {
+  tsconfig: resolve('tsconfig.json')
 }
 
-const input = resolve('./src/index.ts')
-const loaderInput = resolve('./src/customLoader/index.ts')
+// 构建目标列表
+const BUILD_TARGETS = [
+  { 
+    name: 'main',
+    input: './src/index.ts',
+    outputDir: './dist',
+    needsDts: true
+  },
+  {
+    name: 'customLoader',
+    input: './src/customLoader/index.ts',
+    outputDir: './dist/customLoader',
+    needsDts: true
+  },
+  {
+    name: 'initLoader',
+    input: './src/initLoader/index.ts',
+    outputDir: './dist/initLoader',
+    needsDts: true
+  }
+]
 
-const buildConfig = defineConfig({
-    input: input,
-    output: [
-        {
-            file: resolve('./dist/index.mjs'),
-            format: 'esm'
-        },
-        {
-            file: resolve('./dist/index.cjs'),
-            format: 'cjs'
-        }
-    ],
-    plugins: [
-        typescript({
-            tsconfig: resolve('./tsconfig.json')
-        })
-    ]
+// 通用构建配置工厂函数
+const createBuildConfig = (
+  input: string,
+  outputDir: string,
+  format: 'esm' | 'cjs' = 'esm'
+) => defineConfig({
+  input: resolve(input),
+  output: {
+    file: resolve(`${outputDir}/index.${format === 'esm' ? 'mjs' : 'cjs'}`),
+    format
+  },
+  plugins: [typescript(BASE_TS_CONFIG)]
 })
 
-const loaderBuildConfig = defineConfig({
-    input: loaderInput,
-    output: [
-        {
-            file: resolve('./dist/customLoader/index.mjs'),
-            format: 'esm'
-        },
-        {
-            file: resolve('./dist/customLoader/index.cjs'),
-            format: 'cjs'
-        }
-    ],
-    plugins: [
-        typescript({
-            tsconfig: resolve('./tsconfig.json')
-        })
-    ]
+// DTS 配置工厂函数
+const createDtsConfig = (input: string, outputFile: string) => defineConfig({
+  input: resolve(input),
+  output: {
+    file: resolve(outputFile),
+    format: 'esm'
+  },
+  plugins: [
+    typescript(BASE_TS_CONFIG),
+    dts()
+  ]
 })
 
-/**
- * @description: 类型配置
- * @return {*}
- */
-const loaderDtsConfig = defineConfig({
-    input: loaderInput,
-    output: {
-        file: resolve('./dist/customLoader/index.d.ts'),
-        format: 'esm'
-    },
-    plugins: [
-        typescript({
-            tsconfig: resolve('./tsconfig.json')
-        }),
-        dts()
-    ]
-})
+// 生成所有构建配置
+const buildConfigs = BUILD_TARGETS.flatMap(target => [
+  // 主构建配置
+  createBuildConfig(target.input, target.outputDir, 'esm'),
+  createBuildConfig(target.input, target.outputDir, 'cjs'),
+  // DTS 配置
+  ...(target.needsDts ? [
+    createDtsConfig(
+      target.input,
+      `${target.outputDir}/index.d.ts`
+    )
+  ] : [])
+])
 
-/**
- * @description: 类型配置
- * @return {*}
- */
-const dtsConfig = defineConfig({
-    input: input,
-    output: {
-        file: resolve('./dist/index.d.ts'),
-        format: 'esm'
-    },
-    plugins: [
-        typescript({
-            tsconfig: resolve('./tsconfig.json')
-        }),
-        dts()
-    ]
-})
-
-export default [buildConfig, dtsConfig, loaderBuildConfig, loaderDtsConfig]
+export default buildConfigs

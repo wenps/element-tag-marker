@@ -10,7 +10,8 @@ import path from "path";
 import {
   getEntryFiles,
   generateAdvancedRegex,
-  generateEntryRegex
+  generateEntryRegex,
+  hasCustomLoader
 } from "./utils";
 
 // 导出标记插件
@@ -69,46 +70,62 @@ export default class webpackElementTagMarkerPlugin {
       return;
     }
 
-    /**
-     * 检查规则中是否已添加自定义 Loader
-     * 
-     * @param rule Webpack 配置中的规则对象
-     * @returns 如果规则中已添加自定义 Loader，则返回 true；否则返回 false
-     */
-    const hasCustomLoader = (rule: any): boolean => {
-      return rule.use &&
-        Array.isArray(rule.use) &&
-        rule.use.some(({ loader }: { loader: string }) => {
-          return loader && loader.includes("customLoader/index.cjs");
-        });
-    };
-
-    if (
-      option.initMethod
-    ) {
-     //生成入口文件列表
-     const entryFiles = getEntryFiles(compiler.options.entry as unknown as webpack.Entry)
-     if(entryFiles.length) {
-        console.log(generateEntryRegex(entryFiles));
-      }
+    // 检查是否包含自定义核心加载器
+    const hasCoreCustomLoader = (rule: any): boolean => {
+      return hasCustomLoader(rule, "customLoader/index.cjs");
     }
-    
+
+    // 检查是否包含自定义初始化加载器
+    const hasInitCustomLoader = (rule: any): boolean => {
+      return hasCustomLoader(rule, "initLoader/index.cjs");
+    }
+
+    /**
+     * 检查是否可以添加新的 loader 规则
+     * @param rules Webpack 配置中的规则数组
+     * @returns 如果可以添加新规则，返回 true，否则返回 false
+     */
+    const canAddLoaderRule = (rules: any[] | undefined, loaderCheck: (rule: any) => boolean): boolean => {
+      return !!(rules && !rules.some(loaderCheck));
+    };
 
     // 核心函数 文件处理新增标记
     // 添加 Loader 时共享缓存
     compiler.hooks.environment.tap(PLUGIN_NAME, () => {
-      // 添加自定义 Loader 到 Webpack 配置
-      if (
-        compiler.options.module.rules &&
-        !compiler.options.module.rules.some(hasCustomLoader)
-      ) {
-        compiler.options.module.rules.push({
+      // 初始化 init Loader，对代码首文件进行补充，添加 init Loader 到 Webpack 配置
+      if (option.initMethod) {
+        // 生成入口文件列表
+        const entryFiles = getEntryFiles(compiler.options.entry as unknown as webpack.Entry);
+    
+        if (entryFiles.length > 0) {
+          const entryRegex = generateEntryRegex(entryFiles);
+          const rules = compiler.options.module.rules;
+    
+          if (canAddLoaderRule(rules, hasInitCustomLoader)) {
+            rules.push({
+              test: entryRegex,
+              enforce: "post", // 后置 Loader，确保在其他 Loader 之后执行
+              use: [
+                {
+                  // 基于 loader 处理入口文件
+                  loader: path.resolve(__dirname, "./initLoader/index.cjs"),
+                },
+              ],
+            });
+          }
+        }
+      }
+    
+      // 初始化核心 Loader，对代码进行解析，添加核心 Loader 到 Webpack 配置
+      const rules = compiler.options.module.rules;
+      if (canAddLoaderRule(rules, hasCoreCustomLoader)) {
+        rules.push({
           // loader 只能处理 js，因此这里需要作为后置 loader 进行插入
           test: this.test,
           enforce: "post", // 后置 Loader，确保在其他 Loader 之后执行
           use: [
             {
-              // 基于 loader 批量收集目标翻译内容
+              // 基于 loader 批量处理虚拟 dom
               loader: path.resolve(__dirname, "./customLoader/index.cjs"),
             },
           ],

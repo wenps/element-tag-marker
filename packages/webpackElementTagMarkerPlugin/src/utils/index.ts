@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-03-05 15:19:33
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-05 17:36:04
+ * @LastEditTime: 2025-03-06 14:52:55
  * @FilePath: /element-tag-marker/packages/webpackElementTagMarkerPlugin/src/utils/index.ts
  */
 
@@ -109,3 +109,19 @@ export function generateEntryRegex(files: string[]): RegExp {
     // 使用竖线分隔所有转义后的路径，构建一个匹配任何路径的正则表达式
     return new RegExp(`(${escapedPaths.join('|')})$`);
 }
+
+/**
+     * 检查 webpack 规则配置中是否包含自定义加载器
+     * @param rule webpack 规则配置对象
+     * @returns {boolean} 如果包含自定义加载器返回 true，否则返回 false
+     * @description 通过检查规则的 use 数组中是否存在 loader 路径包含 "customLoader/index.cjs" 的加载器来判断
+     */
+export const hasCustomLoader = (rule: any, loaderPath: string): boolean => {
+  return (
+    rule.use &&
+    Array.isArray(rule.use) &&
+    rule.use.some(({ loader }: { loader: string }) => {
+      return loader && loader.includes(loaderPath);
+    })
+  );
+};

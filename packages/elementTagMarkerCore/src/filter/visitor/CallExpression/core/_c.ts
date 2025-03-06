@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-22 19:25:56
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-02-05 17:14:18
+ * @LastEditTime: 2025-03-06 15:11:23
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/filter/visitor/CallExpression/core/_c.ts
  */
 import { getKeyValue, checkTag } from "src/utils";
@@ -29,10 +29,10 @@ export default function (node: any, filePath: string) {
       try {
         return (
           t.isCallExpression(node) &&
-          t.isIdentifier(node.callee.property) &&
-          node.callee.property.name === "_b" &&
-          t.isIdentifier(node.callee.object) &&
-          node.callee.object.name === "_vm"
+          t.isIdentifier((node.callee as any).property) &&
+          (node.callee as any).property.name === "_b" &&
+          t.isIdentifier((node.callee as any).object) &&
+          (node.callee as any).object.name === "_vm"
         );
       } catch (error) {
         return false;
@@ -108,7 +108,7 @@ export default function (node: any, filePath: string) {
     // 处理props参数存在且是对象表达式的情况
     // 查找现有的attrs属性
     const existingAttrs = propsArg.properties.find(
-      (prop): prop is t.ObjectProperty =>
+      (prop: t.ObjectProperty) =>
         t.isObjectProperty(prop) &&
         t.isIdentifier(prop.key) &&
         prop?.key?.name === "attrs"

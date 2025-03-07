@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-06 16:18:46
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-06 16:40:15
+ * @LastEditTime: 2025-03-07 14:51:44
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/type/index.ts
  */
 /**
@@ -41,6 +41,8 @@ export enum TagType {
  * 基础配置类型接口，定义标记工具的基础配置选项
  */
 export interface BaseOption {
+  // 是否显示日志
+  showLog: boolean;
   // 标记类型
   tagType: TagType;
   // 排除的路径列表

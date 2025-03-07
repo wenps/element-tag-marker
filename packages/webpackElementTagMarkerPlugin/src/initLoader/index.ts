@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-03-06 14:28:21
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-07 13:47:09
+ * @LastEditTime: 2025-03-07 14:55:11
  * @FilePath: /element-tag-marker/packages/webpackElementTagMarkerPlugin/src/initLoader/index.ts
  */
 
@@ -31,6 +31,7 @@ module.exports = function (source: string) {
     }
     // 检查 option 是否有 initMethod 属性
     if ('initMethod' in option && typeof option.initMethod === 'function') {
+      option.showLog && console.log("存在initMethod，开始执行");
       return option.initMethod(source, [filePath, entryFiles]);
     }
     return source;

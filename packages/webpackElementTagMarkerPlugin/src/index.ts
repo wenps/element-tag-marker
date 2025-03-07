@@ -54,6 +54,7 @@ export default class webpackElementTagMarkerPlugin {
     } else {
       initOption();
     }
+    option.showLog && console.log("⚙️ 开始执行标志插件！");
   }
 
   /**
@@ -67,6 +68,7 @@ export default class webpackElementTagMarkerPlugin {
 
     // 判断当前是否为生产环境，如果是生产环境，且不在生产环境产生功能时，不处理标记
     if (compiler.options.mode === "production" && !option.toProd) {
+      option.showLog && console.log("⚙️ 当前是否为生产环境，如果是生产环境，且不在生产环境产生功能时，不处理标记！");
       return;
     }
 
@@ -94,14 +96,17 @@ export default class webpackElementTagMarkerPlugin {
     compiler.hooks.environment.tap(PLUGIN_NAME, () => {
       // 初始化 init Loader，对代码首文件进行补充，添加 init Loader 到 Webpack 配置
       if (option.initMethod) {
+        option.showLog && console.log("存在initMethod，开始添加initLoader");
         // 生成入口文件列表
         const entryFiles = getEntryFiles(compiler.options.entry as unknown as webpack.Entry);
     
         if (entryFiles.length > 0) {
+          option.showLog && console.log("入口文件", entryFiles);
           const entryRegex = generateEntryRegex(entryFiles);
           const rules = compiler.options.module.rules;
     
           if (canAddLoaderRule(rules, hasInitCustomLoader)) {
+            option.showLog && console.log("第一次添加initLoader");
             rules.push({
               test: entryRegex,
               enforce: "post", // 后置 Loader，确保在其他 Loader 之后执行
@@ -122,6 +127,7 @@ export default class webpackElementTagMarkerPlugin {
       // 初始化核心 Loader，对代码进行解析，添加核心 Loader 到 Webpack 配置
       const rules = compiler.options.module.rules;
       if (canAddLoaderRule(rules, hasCoreCustomLoader)) {
+        option.showLog && console.log("第一次添加customLoader");
         rules.push({
           // loader 只能处理 js，因此这里需要作为后置 loader 进行插入
           test: this.test,

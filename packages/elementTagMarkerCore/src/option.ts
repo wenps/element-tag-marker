@@ -1,7 +1,7 @@
 /*
  * @Author: xiaoshanwen
  * @Date: 2023-10-26 17:34:47
- * @LastEditTime: 2025-03-06 16:35:00
+ * @LastEditTime: 2025-03-07 14:51:33
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/option.ts
  * @Description: 配置文件，用于设置标记器的各项参数
  */
@@ -14,6 +14,9 @@ import { BaseOption, TagType } from "./type";
 export const fileCache: Map<string, any> = new Map();
 
 const DEFAULT_OPTION: BaseOption = {
+  // 是否显示日志
+  showLog: false,
+
   // 标记类型
   tagType: TagType.hash,
 

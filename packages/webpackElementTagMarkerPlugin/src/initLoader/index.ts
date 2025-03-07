@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-03-06 14:28:21
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-06 16:06:19
+ * @LastEditTime: 2025-03-07 11:35:39
  * @FilePath: /element-tag-marker/packages/webpackElementTagMarkerPlugin/src/initLoader/index.ts
  */
 
@@ -24,7 +24,7 @@ module.exports = function (source: string, ) {
   const context = this as unknown as LoaderContext<LoaderOptions>;
   const filePath = context.resourcePath;
   // 获取loader传入的参数entryFiles
-  const entryFiles = context.getOptions().entryFiles;
+  const entryFiles = context?.getOptions()?.entryFiles;
   // 检查 option 是否有 initMethod 属性
   if ('initMethod' in option && typeof option.initMethod === 'function') {
     return option.initMethod(source, [filePath, entryFiles]);

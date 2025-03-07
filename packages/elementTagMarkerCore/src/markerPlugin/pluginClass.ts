@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-03-04 16:36:11
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-06 18:16:00
+ * @LastEditTime: 2025-03-07 10:33:57
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/markerPlugin/pluginClass.ts
  */
 // 导入类型定义
@@ -29,13 +29,13 @@ export type OptionPlugin = {
 export default class PluginClass {
     // 基础配置选项
     public option: BaseOption;
-    // 转换前的处理函数
+    // 转换前的处理函数，执行babel转换前执行
     public beforeTransform: Transform;
-    // 转换后的处理函数
+    // 转换后的处理函数，执行babel转换后执行
     public afterTransform: Transform;
-    // 初始化方法
+    // 初始化方法，操作入口文件
     public initMethod: initMethod;
-    // 属性转换函数
+    // 属性转换函数，写入入口函数的时候
     public setAttrTransform: AttrTransform;
 
     /**

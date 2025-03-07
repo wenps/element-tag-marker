@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-03-06 17:55:08
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-07 16:05:41
+ * @LastEditTime: 2025-03-07 16:21:24
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/markerPlugin/generateSingleVue2EleIdByPathPlugin/setAttrTransform.ts
  */
 
@@ -55,9 +55,9 @@ export default function setAttrTransform(
   setAttrTransformFn: ((val: string) => string) | null
 ): t.BinaryExpression {
   const realVal =
-    setAttrTransformFn && typeof setAttrTransformFn === "function"
-      ? setAttrTransformFn(val)
-      : "[" + val.toString().split("/src/")[1] + "]";
+    "[" + setAttrTransformFn && typeof setAttrTransformFn === "function"
+    ? setAttrTransformFn(val)
+    : val.toString().split("/src/")[1] + "]";
   // 创建 "[parentTagPath || ''] + [realVal]" 的 AST 节点
   const ast = t.binaryExpression(
     "+",

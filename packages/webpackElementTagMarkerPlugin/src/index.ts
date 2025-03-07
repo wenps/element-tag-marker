@@ -131,7 +131,7 @@ export default class webpackElementTagMarkerPlugin {
         rules.push({
           // loader 只能处理 js，因此这里需要作为后置 loader 进行插入
           test: this.test,
-          // enforce: "post", // 后置 Loader，确保在其他 Loader 之后执行
+          enforce: "post", // 后置 Loader，确保在其他 Loader 之后执行
           use: [
             {
               // 基于 loader 批量处理虚拟 dom

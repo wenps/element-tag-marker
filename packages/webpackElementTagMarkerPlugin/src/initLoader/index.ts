@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-03-06 14:28:21
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-07 11:35:39
+ * @LastEditTime: 2025-03-07 13:47:09
  * @FilePath: /element-tag-marker/packages/webpackElementTagMarkerPlugin/src/initLoader/index.ts
  */
 
@@ -19,15 +19,23 @@ type LoaderOptions = {
  * @param {string} source 源代码内容
  * @returns {string} 处理后的代码
  */
-module.exports = function (source: string, ) {
-  // 获取loader上下文
-  const context = this as unknown as LoaderContext<LoaderOptions>;
-  const filePath = context.resourcePath;
-  // 获取loader传入的参数entryFiles
-  const entryFiles = context?.getOptions()?.entryFiles;
-  // 检查 option 是否有 initMethod 属性
-  if ('initMethod' in option && typeof option.initMethod === 'function') {
-    return option.initMethod(source, [filePath, entryFiles]);
+module.exports = function (source: string) {
+  try {
+    // 获取loader上下文
+    const context = this as unknown as LoaderContext<LoaderOptions>;
+    const filePath = context.resourcePath;
+    let entryFiles;
+    // 检查 context.getOptions 是否为函数
+    if (typeof context.getOptions === 'function') {
+      entryFiles = context.getOptions()?.entryFiles;
+    }
+    // 检查 option 是否有 initMethod 属性
+    if ('initMethod' in option && typeof option.initMethod === 'function') {
+      return option.initMethod(source, [filePath, entryFiles]);
+    }
+    return source;
+  } catch (error) {
+    console.error('An error occurred while processing the source:', error);
+    return source;
   }
-  return source;
 };

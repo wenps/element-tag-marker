@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-22 19:23:56
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-10 18:43:49
+ * @LastEditTime: 2025-03-10 19:12:16
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/filter/visitor/CallExpression/utils/index.ts
  */
 
@@ -39,7 +39,7 @@ export const setAttr = (tag: string, value: string, propsArg: t.ObjectExpression
  * @param {[string, string][] | { tag:string, tagValue:string }} res - 标记属性信息
  * @param {t.ObjectExpression} attrsObj - 目标对象表达式
  */
-export function setObjAttrToObj(res: [string, string][] | { tag:string, tagValue:string }, attrsObj: t.ObjectExpression, node?: t.CallExpression) {
+export function setObjAttrToObj(res: [string, string][] | { tag:string, tagValue:string }, attrsObj: t.ObjectExpression) {
   if (Array.isArray(res)) {
     // 如果是数组形式,循环添加多个标记属性
     res.forEach(([tag, value]) => {

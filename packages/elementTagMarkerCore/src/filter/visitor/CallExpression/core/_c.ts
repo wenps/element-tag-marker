@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-22 19:25:56
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-10 18:53:34
+ * @LastEditTime: 2025-03-10 19:12:32
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/filter/visitor/CallExpression/core/_c.ts
  */
 import { getKeyValue, checkTag } from "src/utils";
@@ -76,11 +76,11 @@ export default function (node: t.CallExpression, filePath: string) {
       );
       if (existingAttrs && t.isObjectExpression(existingAttrs.value)) {
         // 如果已存在attrs属性,使用现有的对象
-        setObjAttrToObj(res, existingAttrs.value, node);
+        setObjAttrToObj(res, existingAttrs.value);
       } else {
         // 如果不存在attrs属性,创建新的对象表达式
         const attrsObj = t.objectExpression([]);
-        setObjAttrToObj(res, attrsObj, node);
+        setObjAttrToObj(res, attrsObj);
         // 创建attrs属性并添加到第一个参数中
         const attrsProperty = t.objectProperty(t.identifier("attrs"), attrsObj);
         firstArg.properties.push(attrsProperty);
@@ -92,7 +92,7 @@ export default function (node: t.CallExpression, filePath: string) {
     // 创建新的对象表达式用于存储标记属性
     let attrsObj = t.objectExpression([]);
     // 设置标记属性到对象中
-    setObjAttrToObj(res, attrsObj, node);
+    setObjAttrToObj(res, attrsObj);
     // 创建新的对象表达式,用于存储attrs属性(Vue2中实际存储在_c的第二个参数中)
     let realAttrsObj = t.objectExpression([]);
     // 将标记属性对象添加到attrs属性中
@@ -130,12 +130,12 @@ export default function (node: t.CallExpression, filePath: string) {
       // 如果已存在attrs属性,使用现有的对象
       attrsObj = existingAttrs.value;
       // 设置标记属性到现有对象中
-      setObjAttrToObj(res, attrsObj, node);
+      setObjAttrToObj(res, attrsObj);
     } else {
       // 如果不存在attrs属性,创建新的对象表达式
       attrsObj = t.objectExpression([]);
       // 设置标记属性到新对象中
-      setObjAttrToObj(res, attrsObj, node);
+      setObjAttrToObj(res, attrsObj);
       // 创建attrs属性并添加到props参数中
       const attrsProperty = t.objectProperty(t.identifier("attrs"), attrsObj);
       if (t.isObjectExpression(propsArg)) {

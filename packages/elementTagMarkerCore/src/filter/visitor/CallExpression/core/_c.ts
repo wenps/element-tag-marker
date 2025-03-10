@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-22 19:25:56
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-06 15:11:23
+ * @LastEditTime: 2025-03-10 18:53:34
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/filter/visitor/CallExpression/core/_c.ts
  */
 import { getKeyValue, checkTag } from "src/utils";
@@ -13,7 +13,7 @@ import * as t from "@babel/types";
  * @param {any} node - AST节点对象
  * @param {string} filePath - 当前处理的文件路径
  */
-export default function (node: any, filePath: string) {
+export default function (node: t.CallExpression, filePath: string) {
   // 校验函数映射表
   const checkFnMap = {
     // 检测是否为空或非对象的情况
@@ -41,7 +41,11 @@ export default function (node: any, filePath: string) {
   };
 
   // 获取组件标签名
-  const tagName = node.arguments[0].value;
+  let tagName: string = '';
+  let firstArg = node.arguments[0];
+  if (t.isStringLiteral(firstArg)) {
+    tagName = firstArg.value;
+  }
   // 检查标签是否需要处理,不需要则直接返回
   if (!checkTag(tagName)) return;
 
@@ -56,7 +60,12 @@ export default function (node: any, filePath: string) {
   // 处理vue v-bind 情况下_b的调用
   if (checkFnMap.check_bCall(propsArg)) {
     // 获取_b函数的第一个参数
-    const firstArg = propsArg.arguments[0];
+    let firstArg
+    // 检查 propsArg 是否为 CallExpression 类型
+    if (t.isCallExpression(propsArg)) {
+      firstArg = propsArg.arguments[0];
+      // 后续使用 firstArg 的代码逻辑
+    }
     if (t.isObjectExpression(firstArg)) {
       // 查找现有的attrs属性
       const existingAttrs = firstArg.properties.find(
@@ -67,11 +76,11 @@ export default function (node: any, filePath: string) {
       );
       if (existingAttrs && t.isObjectExpression(existingAttrs.value)) {
         // 如果已存在attrs属性,使用现有的对象
-        setObjAttrToObj(res, existingAttrs.value);
+        setObjAttrToObj(res, existingAttrs.value, node);
       } else {
         // 如果不存在attrs属性,创建新的对象表达式
         const attrsObj = t.objectExpression([]);
-        setObjAttrToObj(res, attrsObj);
+        setObjAttrToObj(res, attrsObj, node);
         // 创建attrs属性并添加到第一个参数中
         const attrsProperty = t.objectProperty(t.identifier("attrs"), attrsObj);
         firstArg.properties.push(attrsProperty);
@@ -83,7 +92,7 @@ export default function (node: any, filePath: string) {
     // 创建新的对象表达式用于存储标记属性
     let attrsObj = t.objectExpression([]);
     // 设置标记属性到对象中
-    setObjAttrToObj(res, attrsObj);
+    setObjAttrToObj(res, attrsObj, node);
     // 创建新的对象表达式,用于存储attrs属性(Vue2中实际存储在_c的第二个参数中)
     let realAttrsObj = t.objectExpression([]);
     // 将标记属性对象添加到attrs属性中
@@ -107,26 +116,31 @@ export default function (node: any, filePath: string) {
   } else {
     // 处理props参数存在且是对象表达式的情况
     // 查找现有的attrs属性
-    const existingAttrs = propsArg.properties.find(
-      (prop: t.ObjectProperty) =>
-        t.isObjectProperty(prop) &&
-        t.isIdentifier(prop.key) &&
-        prop?.key?.name === "attrs"
-    );
+    // 检查 propsArg 是否为 ObjectExpression 类型
+    const existingAttrs = t.isObjectExpression(propsArg) ? propsArg.properties.find(
+      (value: t.ObjectMethod | t.ObjectProperty | t.SpreadElement): value is t.ObjectProperty =>
+      {
+        return t.isObjectProperty(value) &&
+        t.isIdentifier(value.key) &&
+        value.key.name === "attrs"
+      }
+    ) : null
 
     if (existingAttrs && t.isObjectExpression(existingAttrs.value)) {
       // 如果已存在attrs属性,使用现有的对象
       attrsObj = existingAttrs.value;
       // 设置标记属性到现有对象中
-      setObjAttrToObj(res, attrsObj);
+      setObjAttrToObj(res, attrsObj, node);
     } else {
       // 如果不存在attrs属性,创建新的对象表达式
       attrsObj = t.objectExpression([]);
       // 设置标记属性到新对象中
-      setObjAttrToObj(res, attrsObj);
+      setObjAttrToObj(res, attrsObj, node);
       // 创建attrs属性并添加到props参数中
       const attrsProperty = t.objectProperty(t.identifier("attrs"), attrsObj);
-      propsArg.properties.push(attrsProperty);
+      if (t.isObjectExpression(propsArg)) {
+        propsArg.properties.push(attrsProperty);
+      }
     }
   }
 }

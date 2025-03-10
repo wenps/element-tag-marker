@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-06 16:17:56
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-07 14:19:36
+ * @LastEditTime: 2025-03-10 17:31:24
  * @FilePath: /element-tag-marker/example/webpack-vue2/webpack.config.js
  */
 const path = require("path");
@@ -48,8 +48,7 @@ module.exports = {
       option: {
         writeToFile: "hash",
         tagType: "path",
-        initMethod: GenerateSingleVue2EleIdByPathPlugin.initMethod,
-        setAttrTransform: GenerateSingleVue2EleIdByPathPlugin.setAttrTransform,
+        markerPlugin: GenerateSingleVue2EleIdByPathPlugin
       },
     }),
   ],

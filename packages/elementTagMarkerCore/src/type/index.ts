@@ -1,9 +1,12 @@
 /*
  * @Date: 2025-02-06 16:18:46
  * @LastEditors: xiaoshan
- * @LastEditTime: 2025-03-07 14:51:44
+ * @LastEditTime: 2025-03-07 19:34:37
  * @FilePath: /element-tag-marker/packages/elementTagMarkerCore/src/type/index.ts
  */
+
+import PluginClass from "src/markerPlugin/pluginClass";
+
 /**
  * 转换函数类型定义，可接受源文件内容、文件路径，返回处理后内容，也可为 null 或 undefined
  */
@@ -77,6 +80,8 @@ export interface BaseOption {
   workSpacePath: string;
   // 是否仅显示工作区文件路径
   onlyShowWorkSpaceFilePath: boolean;
+  // 标记插件
+  markerPlugin: PluginClass | null,
   // 转换前处理函数
   beforeTransform: Transform;
   // 转换后处理函数
